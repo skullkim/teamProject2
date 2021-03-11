@@ -4,12 +4,11 @@
   3. npm start
 - - -
 ## 디렉토리 구조
-  1. public - client-side js files,  css files
-    1.1 script - client-side js files
-    1.2 sctyle - css files
-    * client-side js파일명은 파일명 뒤에 '-cli'를 붙일것
-    * css 파일명은 파일명 뒤에 '-style'을 붙일것
-     
+  1. public - client-side js files,  css files<br>  
+    1.1 script - client-side js files<br>  
+    1.2 sctyle - css files<br>  
+    * client-side js파일명은 파일명 뒤에 '-cli'를 붙일것<br>  
+    * css 파일명은 파일명 뒤에 '-style'을 붙일것<br>
   2. routes - router files
   3. views - HTML and nunjucks files
 - - - 

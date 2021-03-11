@@ -28,9 +28,14 @@ app.use(session({
     name: "session-cookie",
 }));
 
-app.get('/', (req, res, next) => {
-    res.send('success');
-})
+// app.get('/', (req, res, next) => {
+//     res.send('success');
+// })
+const index_router = require('./routes');
+
+app.use(path.join(__dirname, '/style'), express.static('public'));
+app.use(path.join(__dirname, '/script'), express.static('public'));
+app.use('/', index_router);
 
 app.use((req, res, next) => {
     const error = new Error(`${res.method} ${req.url} router doesn't exist`);

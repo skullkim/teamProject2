@@ -17,7 +17,7 @@ module.exports = class User extends Sequelize.Model{
                 allowNull: false,
             },
             age:{
-                tyep: Sequelize.INTEGER,
+                type: Sequelize.INTEGER,
                 allowNull: false,
             },
             created_at:{

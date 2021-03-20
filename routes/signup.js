@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/', (req, res, next) => {
     try{
-        res.render('signup');
+        res.render('signup', {message: req.flash('message')});
     }
     catch(err){
         console.error(err);
@@ -22,7 +22,8 @@ router.post('/confirm-signup', async(req, res, next) => {
             where: {name}
         });
         if(ex_user){
-
+            req.flash('message', 'you already signed up');
+            res.redirect('/signup');
         }
         else{
             const password = await bcrypt.hash(passwd1, 12);

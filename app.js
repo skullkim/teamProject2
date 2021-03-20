@@ -7,6 +7,7 @@ const dotenv = require('dotenv');
 const passport = require('passport');
 const {sequelize} = require('./models');
 const nunjucks = require('nunjucks');
+const flash = require('express-flash');
 
 dotenv.config();
 const app = express();
@@ -33,12 +34,13 @@ app.use(session({
     secret: process.env.COOKIE_SECRET,
     cookie: {
         httpOnly: true,
-        secure: true,
+        secure: false,
         maxAge: time.getMilliseconds + (100000 * 60),
     },
     name: "session-cookie",
 }));
 
+app.use(flash());
 
 const index_router = require('./routes');
 const login_router = require('./routes/login');

@@ -3,16 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login</title>
+    <title>signup</title>
 </head>
 <body>
-    <form action="" id="login-form">
+    <form action="/login/confirm-login" method="POST" id="login-form">
         <input type="text" placeholder="name" name="name" id="form__name">
-        <input type="text" placeholder="email" name="email" id="form__email">
-        <input type="text" placeholder="age" name="age" id="form__age">
-        <input type="password" placeholder="password" name="passwd1" id="form__passwd1">
-        <input type="password" placeholder="Verify password" name="passwd2" id="form__passwd2">
-        <input type="submit" value="Join Now!" id="form__submit">
+        <input type="password" placeholder="password" name="password" id="form__password">
+        <input type="submit" value="login" id="form__submir">
     </form>
+    <script src="/script/index-cli.js"></script>
 </body>
 </html>

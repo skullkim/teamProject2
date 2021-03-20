@@ -2,11 +2,12 @@
   1. npm i(맨 처음 실행시에만 사용)
   2. npm i -D nodemon
   3. npm start
+  4. url: localhost:8080
 - - -
 ## 디렉토리 구조
-  1. public - client-side js files,  css files<br>  
-    1.1 script - client-side js files<br>  
-    1.2 sctyle - css files<br>  
+  1. public - client-side js files,  css files<br>
+    1.1 script - client-side js files<br>
+    1.2 sctyle - css files<br>
     * client-side js파일명은 파일명 뒤에 '-cli'를 붙일것<br>
     * client-side js 의 경로는 /script/파일이름-cli.js로 설정할것<br>
     * css 파일명은 파일명 뒤에 '-style'을 붙일것<br>

@@ -4,9 +4,14 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const dotenv = require('dotenv');
+const passport = require('passport');
+const {sequelize} = require('./models');
 
 dotenv.config();
 const app = express();
+sequelize.sync({force:false})
+    .then(() => console.log('sucess to connect DB'))
+    .catch((err) => console.error(err));
 app.set('port', process.env.PORT || 8080);
 
 app.use(morgan('dev'));
@@ -28,9 +33,7 @@ app.use(session({
     name: "session-cookie",
 }));
 
-// app.get('/', (req, res, next) => {
-//     res.send('success');
-// })
+
 const index_router = require('./routes');
 
 app.use(path.join(__dirname, '/style'), express.static('public'));

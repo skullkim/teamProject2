@@ -41,10 +41,12 @@ app.use(session({
 
 
 const index_router = require('./routes');
+const login_router = require('./routes/login');
 
 app.use(path.join(__dirname, '/style'), express.static('public'));
 app.use(path.join(__dirname, '/script'), express.static('public'));
 app.use('/', index_router);
+app.use('/login', login_router);
 
 app.use((req, res, next) => {
     const error = new Error(`${res.method} ${req.url} router doesn't exist`);

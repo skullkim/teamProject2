@@ -6,9 +6,15 @@ const session = require('express-session');
 const dotenv = require('dotenv');
 const passport = require('passport');
 const {sequelize} = require('./models');
+const nunjucks = require('nunjucks');
 
 dotenv.config();
 const app = express();
+app.set('view engine', 'html');
+nunjucks.configure('views', {
+    express: app,
+    watch: true,
+});
 sequelize.sync({force:false})
     .then(() => console.log('sucess to connect DB'))
     .catch((err) => console.error(err));

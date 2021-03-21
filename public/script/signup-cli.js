@@ -32,6 +32,7 @@ submit_btn.addEventListener('click', () => {
             method: 'put',
             url: '/signup/confirm-signup',
             contentType: 'application/json',
+            cacheControl: 'no-cache',
             data:{
                 name,
                 email,

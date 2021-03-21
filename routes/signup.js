@@ -21,7 +21,10 @@ router.put('/confirm-signup', async(req, res, next) => {
             where: {email}
         });
         if(ex_user){
-            res.setHeader('content-type', 'application/json');
+            res.set({
+                'content-type': 'application/json',
+                'Cache-Control': 'no-cache',
+            });
             res.send({err: 'you already signed up'})
         }
         else{
@@ -29,7 +32,10 @@ router.put('/confirm-signup', async(req, res, next) => {
                 where: {name}
             });
             if(same_name){
-                res.setHeader('content-type', 'application/json');
+                res.set({
+                    'content-type': 'application/json',
+                    'Cache-Control': 'no-cache',
+                });
                 res.send({err: 'same user name exist'});
             }
             else{
@@ -40,7 +46,10 @@ router.put('/confirm-signup', async(req, res, next) => {
                     email,
                     age,
                 });
-                res.setHeader('content-type', 'text/html');
+                res.set({
+                    'content-type': 'text/html',
+                    'Cache-Control': 'no-cache',
+                });
                 res.redirect(201, '/');
             }
         }

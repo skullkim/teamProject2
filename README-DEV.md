@@ -14,7 +14,7 @@
     * css 파일의 경로는 /style/파일이름-style.css로 설정할것<br>
   2. routes - router files
   3. views - HTML and nunjucks files 
-  4. config - sequelize와 mysql 연동을 위한 세
+  4. config - sequelize와 mysql 연동을 위한 세팅
   5. models - mysql과 매핑될 객체의 정의
 - - - 
 ## 개발시

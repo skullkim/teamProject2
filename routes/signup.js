@@ -19,7 +19,7 @@ router.post('/confirm-signup', async(req, res, next) => {
         //console.log(req.body);
         const {name, email, age, passwd1, passwd2} = req.body;
         const ex_user = await User.findOne({
-            where: {name}
+            where: {email}
         });
         if(ex_user){
             req.flash('message', 'you already signed up');

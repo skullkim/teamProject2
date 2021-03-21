@@ -4,9 +4,9 @@ const bcrypt = require('bcrypt');
 
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
+router.route('/').get((req, res, next) => {
     try{
-        res.render('signup', {message: req.flash('message')});
+        res.render('signup');
     }
     catch(err){
         console.error(err);
@@ -14,26 +14,35 @@ router.get('/', (req, res, next) => {
     }
 });
 
-router.post('/confirm-signup', async(req, res, next) => {
+router.put('/confirm-signup', async(req, res, next) => {
     try{
-        //console.log(req.body);
-        const {name, email, age, passwd1, passwd2} = req.body;
+        const {name, email, age, passwd1} = req.body;
         const ex_user = await User.findOne({
             where: {email}
         });
         if(ex_user){
-            req.flash('message', 'you already signed up');
-            res.redirect('/signup');
+            res.setHeader('content-type', 'application/json');
+            res.send({err: 'you already signed up'})
         }
         else{
-            const password = await bcrypt.hash(passwd1, 12);
-            await User.create({
-                name,
-                password,
-                email,
-                age,
+            const same_name = await User.findOne({
+                where: {name}
             });
-            res.redirect('/');
+            if(same_name){
+                res.setHeader('content-type', 'application/json');
+                res.send({err: 'same user name exist'});
+            }
+            else{
+                const password = await bcrypt.hash(passwd1, 12);
+                await User.create({
+                    name,
+                    password,
+                    email,
+                    age,
+                });
+                res.setHeader('content-type', 'text/html');
+                res.redirect(201, '/');
+            }
         }
 
     }

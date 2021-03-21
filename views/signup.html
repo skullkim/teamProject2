@@ -6,14 +6,16 @@
     <title>login</title>
 </head>
 <body>
-    <form action="/signup/confirm-signup" method="POST" id="signup-form">
-        <input type="text" placeholder="name" name="name" id="form__name">
-        <input type="text" placeholder="email" name="email" id="form__email">
-        <input type="text" placeholder="age" name="age" id="form__age">
-        <input type="password" placeholder="password" name="passwd1" id="form__passwd1">
-        <input type="password" placeholder="Verify password" name="passwd2" id="form__passwd2">
-        <input type="submit" value="Join Now!" id="form__submit">
-    </form>
-    <span id="message">{{message}}</span>
+    <main id="main">
+        <input type="text" placeholder="name" name="name" id="main__name">
+        <input type="text" placeholder="email" name="email" id="main__email">
+        <input type="text" placeholder="age" name="age" id="main__age">
+        <input type="password" placeholder="password" name="passwd1" id="main__passwd1">
+        <input type="password" placeholder="Verify password" name="passwd2" id="main__passwd2">
+        <input type="submit" value="Join Now!" id="main__submit">
+        <span id="message"></span>
+    </main>
+    {% include "common-script.html" %}
+    <script src="/script/signup-cli.js"></script>
 </body>
 </html>

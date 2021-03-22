@@ -40,4 +40,10 @@ router.post('/confirm-login', async (req, res, next) => {
     })(req, res, next);
 });
 
+router.get('/logout', (req, res, next) => {
+    req.logout();
+    req.session.destroy();
+    res.redirect('/');
+});
+
 module.exports = router;

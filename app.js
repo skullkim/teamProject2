@@ -5,12 +5,14 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const dotenv = require('dotenv');
 const passport = require('passport');
+const passportConfig = require('./passport');
 const {sequelize} = require('./models');
 const nunjucks = require('nunjucks');
 const flash = require('express-flash');
 
 dotenv.config();
 const app = express();
+passportConfig();
 app.set('view engine', 'html');
 nunjucks.configure('views', {
     express: app,
@@ -41,6 +43,8 @@ app.use(session({
 }));
 
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 const index_router = require('./routes');
 const login_router = require('./routes/login');

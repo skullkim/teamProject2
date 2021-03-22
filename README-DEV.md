@@ -23,3 +23,7 @@
 ## 개발시
   1. .gitignore파일을 생성해 node_modules, .env를 추가
   2. .env 파일은 해당 프로젝트의 루트 디렉로리 하위에 추가.
+  3. 로컬로그인 테스트용 임시 계정:
+      email: d@gmail.com
+      password: d
+     

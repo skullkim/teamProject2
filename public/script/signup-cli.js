@@ -42,7 +42,12 @@ submit_btn.addEventListener('click', () => {
         })
             .then((response) => {
                 const {err} = response.data;
-                message.innerText = err;
+                if(err){
+                    message.innerText = err;
+                }
+                else{
+                    location.href = '/';
+                }
             })
             .catch((err) => {
                 console.error(err);

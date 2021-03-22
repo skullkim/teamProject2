@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.route('/').get((req, res, next) => {
     try{
-        res.render('signup');
+        res.render('signup', {is_logged_in: false});
     }
     catch(err){
         console.error(err);

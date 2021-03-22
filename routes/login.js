@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/', (req, res, next) => {
     try{
-        res.render('login');
+        res.render('login', {is_logged_in: false});
     }
     catch(err){
         console.error(err);

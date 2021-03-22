@@ -1,0 +1,13 @@
+<header id="head">
+    <i class="fas fa-laptop-code" id="head__logo"></i>
+    <input type="text" id="head__search">
+    <i class="fas fa-search" head__search-logo></i>
+    {% if is_logged_in %}
+    <a href="/auth/posting" id="head__posting">posting</a>
+    <a href="/auth/profile" id="head__profile">profile</a>
+    <a href="/login/logout" id="head__logout">logout</a>
+    {% else %}
+    <a href="/login" id="head__login">login</a>
+    <a href="/signup" id="head__signup">signup</a>
+    {% endif %}
+</header>

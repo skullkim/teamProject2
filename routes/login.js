@@ -21,7 +21,6 @@ router.post('/confirm-login', async (req, res, next) => {
         failureFlash: true,
         failureRedirec: '/login',
     }, (auth_error, user, info) => {
-        //console.log(1111);
         if(auth_error){
             console.error(auth_error);
             return next(auth_error);

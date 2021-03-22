@@ -8,3 +8,4 @@
 3. views - HTML and nunjucks files
 4. config - sequelize와 mysql 연동을 위한 세
 5. models - mysql과 매핑될 객체의 정의
+6. passport - 로그인을 위한 passport strategy

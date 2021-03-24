@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/common-style.css">
+    <title>New article</title>
+</head>
+<body>
+    {% include "header.html" %}
+    <main id="main">
+        <article id="new-post">
+            <input type="text" placeholder="제목" id="post__title">
+            <select name="" id="post__category">
+                <option>=== 글 카테고리 ===</option>
+                <option value="">알고리즘</option>
+                <option value="">스터디</option>
+                <option value="">알고리즘</option>
+                <option value="">질문</option>
+            </select>
+            <input type="text" placeholder="내용" id="post__main-article">
+            <input type="submit" id="new-post__submit">
+        </article>
+    </main>
+</body>
+</html>

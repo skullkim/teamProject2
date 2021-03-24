@@ -2,10 +2,11 @@ const express = require('express');
 const User = require('../models/users');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
+const{isLoggedIn, isNotLoggedIn} = require('./middlewares');
 
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
+router.get('/', isNotLoggedIn, (req, res, next) => {
     try{
         res.render('login', {is_logged_in: false});
     }
@@ -16,7 +17,7 @@ router.get('/', (req, res, next) => {
 });
 
 //confirm local login
-router.post('/confirm-login', async (req, res, next) => {
+router.post('/confirm-login', isNotLoggedIn, async (req, res, next) => {
     passport.authenticate('local', {
         failureFlash: true,
         failureRedirec: '/login',
@@ -40,7 +41,7 @@ router.post('/confirm-login', async (req, res, next) => {
     })(req, res, next);
 });
 
-router.get('/logout', (req, res, next) => {
+router.get('/logout', isLoggedIn, (req, res, next) => {
     req.logout();
     req.session.destroy();
     res.redirect('/');

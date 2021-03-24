@@ -1,10 +1,11 @@
 const express = require('express');
 const User = require('../models/users');
 const bcrypt = require('bcrypt');
+const{isLoggedIn, isNotLoggedIn} = require('./middlewares');
 
 const router = express.Router();
 
-router.route('/').get((req, res, next) => {
+router.get('/', isNotLoggedIn, (req, res, next) => {
     try{
         res.render('signup', {is_logged_in: false});
     }
@@ -14,7 +15,7 @@ router.route('/').get((req, res, next) => {
     }
 });
 
-router.put('/confirm-signup', async(req, res, next) => {
+router.put('/confirm-signup', isNotLoggedIn, async(req, res, next) => {
     try{
         const {name, email, age, passwd1} = req.body;
         const ex_user = await User.findOne({

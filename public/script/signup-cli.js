@@ -1,4 +1,4 @@
-const submit_btn = document.getElementById('main__submit');
+const submit_btn = document.getElementById('local__submit');
 
 //올바른 이메일 주소인지를 판
 const checkEmail = (email) => {
@@ -12,11 +12,11 @@ const checkAge = (age) => {
 }
 
 submit_btn.addEventListener('click', () => {
-    const name = document.getElementById('main__name').value;
-    const age = document.getElementById('main__age').value;
-    const passwd1 = document.getElementById('main__passwd1').value;
-    const passwd2 = document.getElementById('main__passwd2').value;
-    const email = document.getElementById('main__email').value;
+    const name = document.getElementById('local__name').value;
+    const age = document.getElementById('local__age').value;
+    const passwd1 = document.getElementById('local__passwd1').value;
+    const passwd2 = document.getElementById('local__passwd2').value;
+    const email = document.getElementById('local__email').value;
     const message = document.getElementById('message');
     if(passwd1 !== passwd2){
         message.innerText = "incorrect password";

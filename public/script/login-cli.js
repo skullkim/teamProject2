@@ -4,8 +4,8 @@ const checkEmail = (email) => {
     return !reg_email.test(email) ? false : true;
 }
 submit_btn.addEventListener('click', () =>{
-    const email = document.getElementById('login__name').value;
-    const password = document.getElementById('login__password').value;
+    const email = document.getElementById('local__name').value;
+    const password = document.getElementById('local__password').value;
     const message = document.getElementById('login__err-message');
     if(!checkEmail(email)){
         message.innerText = "incorrect email address";

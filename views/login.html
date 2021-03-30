@@ -10,9 +10,17 @@
     {% include "header.html" %}
     <main id="main">
         <article id="main__login">
-            <input type="text" placeholder="email" name="email" id="login__name">
-            <input type="password" placeholder="password" name="password" id="login__password">
-            <input type="submit" value="login" id="login__submit">
+            <section id="login__local">
+                <input type="text" placeholder="email" name="email" id="local__name">
+                <input type="password" placeholder="password" name="password" id="local__password">
+                <input type="submit" value="login" id="login__submit">
+            </section>
+            <section id="login__kakao">
+                <a href="/login/kakao" id="kakao__login-btn">
+                    <i class="fas fa-comment"></i>
+                    Login with Kakao
+                </a>
+            </section>
             <span id="login__err-message"></span>
         </article>
     </main>

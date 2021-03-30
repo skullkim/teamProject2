@@ -9,12 +9,22 @@
 <body>
     {% include "header.html" %}
     <main id="main">
-        <input type="text" placeholder="name" name="name" id="main__name">
-        <input type="text" placeholder="email" name="email" id="main__email">
-        <input type="text" placeholder="age" name="age" id="main__age">
-        <input type="password" placeholder="password" name="passwd1" id="main__passwd1">
-        <input type="password" placeholder="Verify password" name="passwd2" id="main__passwd2">
-        <input type="submit" value="Join Now!" id="main__submit">
+        <article id="main__signup">
+            <section id="signup__local">
+                <input type="text" placeholder="name" name="name" id="local__name">
+                <input type="text" placeholder="email" name="email" id="local__email">
+                <input type="text" placeholder="age" name="age" id="local__age">
+                <input type="password" placeholder="password" name="passwd1" id="local__passwd1">
+                <input type="password" placeholder="Verify password" name="passwd2" id="local__passwd2">
+                <input type="submit" value="Join Now!" id="local__submit">
+            </section>
+            <section id="signup__kakao">
+                <a href="/login/kakao" id="kakao__signup-btn">
+                    <i class="fas fa-comment"></i>
+                    Login with Kakao
+                </a>
+            </section>
+        </article>
         <span id="message"></span>
     </main>
     {% include "common-script.html" %}

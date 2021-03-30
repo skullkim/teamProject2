@@ -41,6 +41,15 @@ router.post('/confirm-login', isNotLoggedIn, async (req, res, next) => {
     })(req, res, next);
 });
 
+//kakao login
+router.get('/kakao', isNotLoggedIn, passport.authenticate('kakao'));
+
+router.get('/kakao/callback', passport.authenticate('kakao', {
+    failureRedirect: '/login'
+}), (req, res) => {
+    res.redirect('/');
+});
+
 router.get('/logout', isLoggedIn, (req, res, next) => {
     req.logout();
     req.session.destroy();

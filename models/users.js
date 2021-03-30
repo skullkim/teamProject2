@@ -18,13 +18,18 @@ module.exports = class User extends Sequelize.Model{
             },
             age:{
                 type: Sequelize.INTEGER,
-                allowNull: false,
             },
             created_at:{
                 type: Sequelize.DATE,
                 allowNull: false,
                 defaultValue: Sequelize.NOW,
-            }
+            },
+            login_as:{
+                type: Sequelize.STRING(50),
+            },
+            kakao_id:{
+                type: Sequelize.INTEGER,
+            },
         },{
             sequelize,
             timestamps: false,
@@ -36,5 +41,7 @@ module.exports = class User extends Sequelize.Model{
             collate: 'utf8_general_ci',
         })
     }
-    static associate(db){}
+    static associate(db){
+        db.User.hasMany(db.Token, {foreignKey: 'id', sourceKey: 'id'});
+    }
 }

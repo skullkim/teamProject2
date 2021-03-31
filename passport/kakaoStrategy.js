@@ -10,18 +10,19 @@ module.exports = () => {
     }, async(accessToken, refreshToken, profile, done) => {
         try{
             const {id, username} = profile;
+            const login_as = 'kakao';
             //console.log(profile);
             const ex_user = await User.findOne({
-                where: {name: id},
+                where: {login_as, api_id: id},
             });
             let user, user_id;
             if(ex_user){
                 await User.update(
                     {
-                        login_as: 'kakao',
+                        login_as,
                         name: `${username}`,
                     },
-                    {where: {api_id: id}},
+                    {where: {login_as, api_id: id}},
                 );
                 user = ex_user;
                 user_id = ex_user.id;

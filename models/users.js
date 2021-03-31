@@ -27,7 +27,7 @@ module.exports = class User extends Sequelize.Model{
             login_as:{
                 type: Sequelize.STRING(50),
             },
-            kakao_id:{
+            api_id:{
                 type: Sequelize.INTEGER,
             },
         },{

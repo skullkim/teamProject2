@@ -14,7 +14,7 @@ module.exports = () => passport.use(new githubStrategy({
         const {login, id} = profile._json;
         const login_as = 'github';
         const ex_user = await User.findOne({
-            where: {kakao_id: id, login_as}
+            where: {api_id: id, login_as}
         });
         const date = new Date();
         let user, user_id;
@@ -25,7 +25,7 @@ module.exports = () => passport.use(new githubStrategy({
                     password: `${id}`,
                     email: `${date.getMilliseconds()}`
                 },
-                {where: {kakao_id: id, login_as}}
+                {where: {api_id: id, login_as}}
             )
             user = ex_user;
             user_id = ex_user.id;
@@ -36,7 +36,7 @@ module.exports = () => passport.use(new githubStrategy({
                 password: `${id}`,
                 email: `${date.getMilliseconds()}`,
                 login_as,
-                kakao_id: `${id}`,
+                api_id: `${id}`,
             });
             user = new_user;
             user_id = new_user.id;

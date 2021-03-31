@@ -21,7 +21,7 @@ module.exports = () => {
                         login_as: 'kakao',
                         name: `${username}`,
                     },
-                    {where: {kakao_id: id}},
+                    {where: {api_id: id}},
                 );
                 user = ex_user;
                 user_id = ex_user.id;
@@ -32,7 +32,7 @@ module.exports = () => {
                     name: username,
                     password: `${id}`,
                     email: `${date.getMilliseconds()}`,
-                    kakao_id: `${id}`,
+                    api_id: `${id}`,
                 });
                 user = new_user;
                 user_id = new_user.id;

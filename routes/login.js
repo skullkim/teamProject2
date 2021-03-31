@@ -50,6 +50,15 @@ router.get('/kakao/callback', passport.authenticate('kakao', {
     res.redirect('/');
 });
 
+//github login
+router.get('/github', isNotLoggedIn, passport.authenticate('github'));
+
+router.get('/github/callback', passport.authenticate('github', {
+    failureRedirect: '/login'
+}), (req, res) => {
+    res.redirect('/');
+});
+
 router.get('/logout', isLoggedIn, (req, res, next) => {
     req.logout();
     req.session.destroy();

@@ -10,6 +10,7 @@ module.exports = () => {
     }, async(accessToken, refreshToken, profile, done) => {
         try{
             const {id, username} = profile;
+            console.log('id', id);
             const login_as = 'kakao';
             //console.log(profile);
             const ex_user = await User.findOne({
@@ -33,6 +34,7 @@ module.exports = () => {
                     name: username,
                     password: `${id}`,
                     email: `${date.getMilliseconds()}`,
+                    login_as,
                     api_id: `${id}`,
                 });
                 user = new_user;

@@ -2,6 +2,8 @@ const express = require('express');
 const User = require('../models/users');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
+const Token = require('../models/token');
+const axios = require('axios');
 const{isLoggedIn, isNotLoggedIn} = require('./middlewares');
 
 const router = express.Router();
@@ -59,8 +61,32 @@ router.get('/github/callback', passport.authenticate('github', {
     res.redirect('/');
 });
 
-router.get('/logout', isLoggedIn, (req, res, next) => {
-    req.logout();
+router.get('/logout', isLoggedIn, async (req, res, next) => {
+    const {id, login_as, api_id} = req.user;
+    const token = await Token.findOne({
+        where: {user: id}
+    });
+    if(login_as === 'kakao'){
+        const logout_url = `${process.env.KAKAO_LOGOUT}?client_id=${process.env.KAKAO_CLIENT_ID}&logout_redirect_uri=${process.env.KAKAO_LOGOUT_REDIRECT}`;
+        axios({
+            method: 'get',
+            url: `${logout_url}`,
+            headers: {
+                HOST: 'kauth.kakao.com',
+            }
+        })
+            .then((response) => {
+                console.log(`kakao logout success ${response}`);
+            })
+            .catch((err) => {
+                console.error(err);
+                next(err);
+            });
+    }
+    await Token.destroy({
+        where: {user: id}
+    });
+    req.logOut();
     req.session.destroy();
     res.redirect('/');
 });

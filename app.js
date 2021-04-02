@@ -50,6 +50,7 @@ const index_router = require('./routes');
 const login_router = require('./routes/login');
 const signup_router = require('./routes/signup');
 const auth_router = require('./routes/auth');
+const letter_router = require('./routes/letter');
 
 app.use(path.join(__dirname, '/style'), express.static('public'));
 app.use(path.join(__dirname, '/script'), express.static('public'));
@@ -57,6 +58,7 @@ app.use('/', index_router);
 app.use('/login', login_router);
 app.use('/signup', signup_router);
 app.use('/auth', auth_router);
+app.use('/letter', letter_router);
 
 app.use((req, res, next) => {
     const error = new Error(`${res.method} ${req.url} router doesn't exist`);

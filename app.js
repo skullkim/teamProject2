@@ -9,6 +9,7 @@ const passportConfig = require('./passport');
 const {sequelize} = require('./models');
 const nunjucks = require('nunjucks');
 const flash = require('express-flash');
+const favicon = require('serve-favicon');
 
 dotenv.config();
 const app = express();
@@ -24,6 +25,7 @@ sequelize.sync({force:false})
 app.set('port', process.env.PORT || 8080);
 
 app.use(morgan('dev'));
+app.use(favicon(path.join(__dirname, 'public', 'main-logo.ico')))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));

@@ -30,6 +30,10 @@ module.exports = class User extends Sequelize.Model{
             api_id:{
                 type: Sequelize.INTEGER,
             },
+            profile_key:{
+                type: Sequelize.STRING(1000),
+                defaultValue: null,
+            },
         },{
             sequelize,
             timestamps: false,

@@ -4,7 +4,8 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const Token = require('../models/token');
 const axios = require('axios');
-const{isLoggedIn, isNotLoggedIn} = require('./middlewares');
+const AWS = require('aws-sdk');
+const{isLoggedIn, isNotLoggedIn, AwsConfig} = require('./middlewares');
 
 const router = express.Router();
 
@@ -62,10 +63,19 @@ router.get('/github/callback', passport.authenticate('github', {
 });
 
 router.get('/logout', isLoggedIn, async (req, res, next) => {
-    const {id, login_as, api_id} = req.user;
+    const {id, login_as, api_id, profile_key} = req.user;
     const token = await Token.findOne({
         where: {user: id}
     });
+    if(login_as === 'kakao' || login_as === 'github'){
+        const s3 = new AWS.S3();
+        s3.deleteObject({
+            Bucket: `${process.env.AWS_S3_BUCKET}`,
+            Key: `${profile_key}`,
+        }, (err, data) => {
+            err ? console.error(err) : console.log(`${login_as} profile image deleted`);
+        });
+    }
     if(login_as === 'kakao'){
         const logout_url = `${process.env.KAKAO_LOGOUT}?client_id=${process.env.KAKAO_CLIENT_ID}&logout_redirect_uri=${process.env.KAKAO_LOGOUT_REDIRECT}`;
         axios({

@@ -47,4 +47,25 @@ router.get('/profile-img', isLoggedIn, (req, res, next) => {
     }
 });
 
+router.get('/main-logo', (req, res, next) => {
+    try{
+        const s3 = new AWS.S3();
+        s3.getObject({
+            Bucket: `${process.env.AWS_S3_BUCKET}`,
+            Key: `${process.env.MAIN_LOGO_KEY}`,
+        }, (err, data) => {
+            if(err){
+                console.error(err);
+            }
+            else{
+                res.write(data.Body, 'binary');
+                res.end(null, 'binary');
+            }
+        });
+    }
+    catch(err){
+
+    }
+})
+
 module.exports = router;

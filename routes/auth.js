@@ -28,9 +28,11 @@ router.get('/profile', isLoggedIn, (req, res, next) => {
 router.get('/profile-img', isLoggedIn, (req, res, next) => {
     try{
         const s3 = new AWS.S3();
+        const {profile_key} = req.user;
+        const s3_key = profile_key ? profile_key : process.env.DEFAULT_PROFILE_IMG_KEY;
         s3.getObject({
             Bucket: `${process.env.AWS_S3_BUCKET}`,
-            Key: `${process.env.DEFAULT_PROFILE_IMG_KEY}`,
+            Key: `${s3_key}`,
         }, (err, data) => {
             if(err){
                 console.error(err);

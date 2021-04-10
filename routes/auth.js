@@ -1,6 +1,8 @@
 const express = require('express');
 const AWS = require('aws-sdk');
 const{isLoggedIn, isNotLoggedIn, AwsConfig} = require('./middlewares');
+const User = require("../models/users");
+const bcrypt = require('bcrypt');
 
 const router = express.Router();
 
@@ -16,8 +18,9 @@ router.get('/posting', isLoggedIn, (req, res, next) => {
 
 router.get('/profile', isLoggedIn, (req, res, next) => {
     try{
-        const {name} = req.user.dataValues;
-        res.render('profile', {is_logged_in: true, user_name: name});
+        const {name, login_as} = req.user.dataValues;
+        const local_login = login_as ? false : true;
+        res.render('profile', {is_logged_in: true, user_name: name, local_login});
     }
     catch(err){
         console.error(err);
@@ -66,7 +69,40 @@ router.get('/main-logo', (req, res, next) => {
         });
     }
     catch(err){
+        console.error(err);
+        next(err);
+    }
+});
 
+router.get('/edit-password', isLoggedIn, (req, res, next) => {
+    try{
+        res.render('edit-password', {is_logged_in: true});
+    }
+    catch(err){
+        console.error(err);
+        next(err);
+    }
+});
+
+router.put('/confirm-edit-password', isLoggedIn, async (req, res, next) => {
+    try{
+        const {prev_passwd, new_passwd, login_as} = req.body;
+        const {id, password} = req.user;
+        const result = await bcrypt.compare(prev_passwd, password);
+        if(!result){
+            res.send({err: 'incorrect previous password'});
+            return;
+        }
+        const new_password = await bcrypt.hash(new_passwd, 12);
+        await User.update(
+            {password: new_password},
+            {where: {id}},
+        );
+        res.end();
+    }
+    catch(err){
+        console.error(err);
+        next(err);
     }
 })
 

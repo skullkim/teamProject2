@@ -13,7 +13,9 @@
             <img src="/auth/profile-img" alt="" id="user-info__img" height="100px" width="100px">
             <span id="user-info__name">{{user_name}}</span>
             <a href="" id="user-info__edit-profile"></a>
-            <a href="" id="user-info__change-password"></a>
+            {% if local_login %}
+            <a href="/auth/edit-password" id="user-info__change-password">change password</a>
+            {% endif %}
         </article>
     </main>
     {% include "common-script.html" %}

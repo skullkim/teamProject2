@@ -106,4 +106,14 @@ router.put('/confirm-edit-password', isLoggedIn, async (req, res, next) => {
     }
 })
 
+router.get('/edit-profile', isLoggedIn, (req, res, next) => {
+    try{
+        res.render('edit-profile', {is_logged_in: true});
+    }
+    catch(err){
+        console.error(err);
+        next(err);
+    }
+});
+
 module.exports = router;

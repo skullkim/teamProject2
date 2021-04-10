@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit profile</title>
+</head>
+<body>
+    {% include "header.html" %}
+    <main id="main">
+        <section id="main__edit-profile">
+            <input type="text" placeholder="" id="edit-profile__name">
+            <input type="text" placeholder="" id="edit-profile__email">
+            <input type="text" placeholder="" id="edit-profile__age">
+            <button id="edit-profile__submit">change profile</button>
+        </section>
+    </main>
+    {% include "common-script.html" %}
+    <script src="/script/edit-profile-cli.js"></script>
+</body>
+</html>

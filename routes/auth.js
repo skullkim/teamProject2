@@ -153,6 +153,17 @@ router.put('/new-posting', isLoggedIn, async (req, res, next) => {
         console.error(err);
         next(err);
     }
-})
+});
+
+router.get('/postings', async (req, res, next) => {
+    try{
+        const postings = await Posting.findAll();
+        res.send(postings);
+    }
+    catch(err){
+        console.error(err);
+        next(err);
+    }
+});
 
 module.exports = router;

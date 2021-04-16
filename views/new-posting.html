@@ -13,16 +13,20 @@
             <input type="text" placeholder="제목" id="post__title">
             <select name="" id="post__category">
                 <option>=== 글 카테고리 ===</option>
-                <option value="">알고리즘</option>
-                <option value="">스터디</option>
-                <option value="">취업</option>
-                <option value="">도서 추천&리뷰</option>
-                <option value="">코딩질문</option>
-                <option value="">자유게시판</option>
+                <option value="알고리즘">알고리즘</option>
+                <option value="스터디">스터디</option>
+                <option value="취업">취업</option>
+                <option value="도서 추천&리뷰">도서 추천&리뷰</option>
+                <option value="코딩질문">코딩질문</option>
+                <option value="자유게시판">자유게시판</option>
             </select>
-            <input type="text" placeholder="내용" id="post__main-article">
+<!--            <input type="text" placeholder="내용" id="post__main-article">-->
+            <textarea name="" id="post__main-context" cols="30" rows="10"></textarea>
             <input type="submit" id="new-post__submit">
+            <span id="message"></span>
         </article>
     </main>
+    {% include "common-script.html" %}
+    <script src="/script/new-posting-cli.js"></script>
 </body>
 </html>

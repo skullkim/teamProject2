@@ -2,6 +2,7 @@ const express = require('express');
 const AWS = require('aws-sdk');
 const{isLoggedIn, isNotLoggedIn, AwsConfig} = require('./middlewares');
 const User = require("../models/users");
+const Posting = require('../models/postings');
 const bcrypt = require('bcrypt');
 
 const router = express.Router();
@@ -104,7 +105,7 @@ router.put('/confirm-edit-password', isLoggedIn, async (req, res, next) => {
         console.error(err);
         next(err);
     }
-})
+});
 
 router.get('/edit-profile', isLoggedIn, (req, res, next) => {
     try{
@@ -115,5 +116,43 @@ router.get('/edit-profile', isLoggedIn, (req, res, next) => {
         next(err);
     }
 });
+
+router.get('/user-info', isLoggedIn, (req, res, next) => {
+    try{
+        const {name, email, age} = req.user;
+        res.send({name, email, age});
+    }
+    catch(err){
+        console.error(err);
+        next(err);
+    }
+});
+
+router.put('/new-posting', isLoggedIn, async (req, res, next) => {
+    try{
+        const {title, category, context} = req.body;
+        const {id} = req.user;
+        console.log(id, title, category, context);
+        const ex_posting =  await Posting.findOne({
+            where: {title},
+        });
+        if(ex_posting){
+            res.send({err: 'same title exist'});
+        }
+        else{
+            await Posting.create({
+                author: id,
+                title,
+                main_posting: `${context}`,
+                main_category: `${category}`,
+            });
+            res.send({success: 'success'});
+        }
+    }
+    catch(err){
+        console.error(err);
+        next(err);
+    }
+})
 
 module.exports = router;

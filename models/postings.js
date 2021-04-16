@@ -31,7 +31,7 @@ module.exports = class Posting extends Sequelize.Model{
             modelName: 'Posting',
             tableName: 'postings',
             paranoid: false,
-            charset: 'urf8',
+            charset: 'utf8',
             collate: 'utf8_general_ci',
         });
     }

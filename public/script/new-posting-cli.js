@@ -32,7 +32,18 @@ $(document).ready(() => {
             data: {category}
         })
             .then((response) => {
-                console.log(response);
+                //console.log(response);
+                const {tags} = response.data;
+                const tag = $('#post__tag');
+                let ids = 0, id
+                tags.forEach((ele) => {
+                    id = `category-${ids}`;
+                    const check_box = $(`
+                        <input type="checkbox" id="${id}" value=${ele}>
+                        <label for="${id}">${ele}</label>
+                    `);
+                    tag.append(check_box);
+                });
             })
             .catch((err) => {
                 console.error(err);

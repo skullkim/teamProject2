@@ -23,7 +23,20 @@ $(document).ready(() => {
 
     const category_options = $('#post__category');
     category_options.change(() => {
-        console.log(getCategory());
+        const category = getCategory();
+        axios({
+            method: 'post',
+            url: '/letter/tags',
+            contentType: 'application/json',
+            cacheControl: 'nocache',
+            data: {category}
+        })
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((err) => {
+                console.error(err);
+            })
     })
 
     const submit_btn = $('#new-post__submit');

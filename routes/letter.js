@@ -23,7 +23,7 @@ router.get('/written', (req, res, next) => {
         console.error(err);
         next(err);
     }
-})
+});
 
 router.get('/letter-context', async (req, res, next) => {
     try{
@@ -37,6 +37,17 @@ router.get('/letter-context', async (req, res, next) => {
         });
         context.dataValues.author = ex_user.name;
         res.send(JSON.stringify(context.dataValues));
+    }
+    catch(err){
+        console.error(err);
+        next(err);
+    }
+});
+
+router.post('/tags', (req, res, next) => {
+    try{
+        const {category} = req.body;
+        console.log(category);
     }
     catch(err){
         console.error(err);

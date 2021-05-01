@@ -39,7 +39,7 @@ $(document).ready(() => {
                 tags.forEach((ele) => {
                     id = `category-${ids}`;
                     const check_box = $(`
-                        <input type="checkbox" id="${id}" value=${ele}>
+                        <input type="checkbox" id="${id}" value=${ele} name="tag-box">
                         <label for="${id}">${ele}</label>
                     `);
                     tag.append(check_box);
@@ -55,6 +55,12 @@ $(document).ready(() => {
         const title = $('#post__title').val();
         const category = getCategory();
         const context = $('#post__main-context').val();
+        const tags = new Array();
+        $('input:checkbox[name="tag-box"]').each(function(){
+            if(this.checked === true){
+                tags.push(this.value);
+            }
+        });
         if(!makeErrorMessage(title, category, context)){
             return;
         }
@@ -82,4 +88,5 @@ $(document).ready(() => {
                 console.error(err);
             })
     });
+
 });

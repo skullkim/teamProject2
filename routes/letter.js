@@ -2,6 +2,9 @@ const express = require('express');
 const {isLoggedIn} = require('./middlewares');
 const Posting = require('../models/postings');
 const User = require('../models/users');
+const fs = require('fs');
+const path = require('path');
+const util = require('util');
 
 const router = express.Router();
 
@@ -44,10 +47,12 @@ router.get('/letter-context', async (req, res, next) => {
     }
 });
 
-router.post('/tags', (req, res, next) => {
+router.post('/tags', async (req, res, next) => {
     try{
         const {category} = req.body;
-        console.log(category);
+        const readFile = util.promisify(fs.readFile);
+        const tags = JSON.parse(await readFile(path.join(__dirname, '../public/tags.json'), 'utf8'));
+        res.send({"tags": tags[category]});
     }
     catch(err){
         console.error(err);

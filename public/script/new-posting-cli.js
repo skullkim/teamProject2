@@ -1,5 +1,9 @@
 $(document).ready(() => {
-    const submit_btn = $('#new-post__submit');
+    const getCategory = () => {
+        const categories = $('#post__category')[0];
+        return categories.options[categories.selectedIndex].value;
+    }
+
     const message = $('#message');
     const makeErrorMessage = (title, category, context) => {
         if(!title){
@@ -16,10 +20,16 @@ $(document).ready(() => {
         }
         return true;
     }
+
+    const category_options = $('#post__category');
+    category_options.change(() => {
+        console.log(getCategory());
+    })
+
+    const submit_btn = $('#new-post__submit');
     submit_btn.click(() => {
         const title = $('#post__title').val();
-        const categories = $('#post__category')[0];
-        const category = categories.options[categories.selectedIndex].value;
+        const category = getCategory();
         const context = $('#post__main-context').val();
         if(!makeErrorMessage(title, category, context)){
             return;

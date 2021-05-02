@@ -3,6 +3,8 @@ const AWS = require('aws-sdk');
 const{isLoggedIn, isNotLoggedIn, AwsConfig} = require('./middlewares');
 const User = require("../models/users");
 const Posting = require('../models/postings');
+const Tag = require('../models/tags');
+const PostTag = require('../models/post_tag');
 const bcrypt = require('bcrypt');
 
 const router = express.Router();
@@ -130,9 +132,9 @@ router.get('/user-info', isLoggedIn, (req, res, next) => {
 
 router.put('/new-posting', isLoggedIn, async (req, res, next) => {
     try{
-        const {title, category, context} = req.body;
+        const {title, category, context, tags} = req.body;
         const {id} = req.user;
-        console.log(id, title, category, context);
+        console.log(tags[0]);
         const ex_posting =  await Posting.findOne({
             where: {title},
         });
@@ -145,6 +147,13 @@ router.put('/new-posting', isLoggedIn, async (req, res, next) => {
                 title,
                 main_posting: `${context}`,
                 main_category: `${category}`,
+            });
+            tags.forEach((tag) => {
+                Tag.create({
+                    tag,
+                })
+                    .then((response) => console.log('success'))
+                    .catch((err) => console.error(err));
             });
             res.send({success: 'success'});
         }

@@ -19,6 +19,6 @@ module.exports = class Tag extends Sequelize.Model{
         });
     }
     static associate(db){
-        db.PostTag.belongsToMany(db.Tag, {through: 'post_tag', foreignKey: 'id'});
+        db.Tag.belongsToMany(db.Posting, {through: 'PostTag'});
     }
 }

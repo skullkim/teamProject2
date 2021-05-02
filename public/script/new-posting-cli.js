@@ -73,6 +73,7 @@ $(document).ready(() => {
                 title,
                 category,
                 context,
+                tags
             }
         })
             .then((response) => {

@@ -44,6 +44,17 @@ router.post('/confirm-login', isNotLoggedIn, async (req, res, next) => {
     })(req, res, next);
 });
 
+//find password(change password)
+router.get('/new-password', isNotLoggedIn, (req, res, next) => {
+    try{
+        res.render("change-password", {is_logged_in: false});
+    }
+    catch(err){
+        console.error(err);
+        next(err);
+    }
+})
+
 //kakao login
 router.get('/kakao', isNotLoggedIn, passport.authenticate('kakao'));
 

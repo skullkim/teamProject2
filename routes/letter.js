@@ -41,14 +41,7 @@ router.get('/letter-context', async (req, res, next) => {
         tags.forEach((e) => {
             tag_arr.push(e.tag);
         });
-        console.log(tag_arr);
-        //console.log(tags.foreach((e) => ));
-       //  console.log(context.id);
-       // const tmp = await Tag.findAll({
-       //     where: {id: context.id},
-       //     include:{model: Posting},
-       // });
-       //  console.log(tmp);
+        //console.log(tag_arr);
 
         const id = posting.dataValues.author;
         const ex_user = await User.findOne({

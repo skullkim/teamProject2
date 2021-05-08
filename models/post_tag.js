@@ -5,10 +5,12 @@
 //         return super.init({
 //             post_id:{
 //                 type: Sequelize.INTEGER,
+//                 primaryKey: true,
 //                 allowNull: false,
 //             },
 //             tag_id:{
 //                 type: Sequelize.INTEGER,
+//                 primaryKey: true,
 //                 allowNull: false,
 //             },
 //         }, {
@@ -23,7 +25,7 @@
 //         });
 //     }
 //     static associate(db){
-//         db.Posting.belongsTo(db.Posting, {foreignKey: 'post_id'});
-//         db.Tag.belongsTo(db.Posting, {foreignKey: 'tag_id'});
+//         db.PostTag.belongsTo(db.Posting, {foreignKey: 'post_id'});
+//         db.PostTag.belongsTo(db.Tag, {foreignKey: 'tag_id'});
 //     }
 // }

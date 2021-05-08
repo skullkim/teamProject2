@@ -26,4 +26,9 @@ Posting.init(sequelize);
 Tag.init(sequelize);
 //PostTag.init(sequelize);
 
+User.associate(db);
+Token.associate(db);
+Posting.associate(db);
+Tag.associate(db);
+
 module.exports = db;

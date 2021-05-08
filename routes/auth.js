@@ -142,19 +142,22 @@ router.put('/new-posting', isLoggedIn, async (req, res, next) => {
             res.send({err: 'same title exist'});
         }
         else{
-            await Posting.create({
+            const posting = await Posting.create({
                 author: id,
                 title,
                 main_posting: `${context}`,
                 main_category: `${category}`,
             });
-            tags.forEach((tag) => {
-                Tag.create({
-                    tag,
+            const result = await Promise.all(
+                tags.map((tag) => {
+                    return Tag.findOrCreate({
+                        where: {tag},
+                    });
                 })
-                    .then((response) => console.log('success'))
-                    .catch((err) => console.error(err));
-            });
+            );
+            //console.log(result);
+            await posting.addTags(result.map(r => r[0]));
+
             res.send({success: 'success'});
         }
     }

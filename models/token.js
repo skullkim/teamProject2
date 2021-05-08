@@ -31,6 +31,6 @@ module.exports = class Token extends Sequelize.Model{
         });
     }
     static associate(db){
-        db.User.belongsTo(db.User, {foreignKey: 'id', targetKey: 'id'});
+        db.Token.belongsTo(db.User, {foreignKey: 'id', targetKey: 'id'});
     }
 }

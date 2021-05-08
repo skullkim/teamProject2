@@ -3,15 +3,25 @@ $(document).ready(() => {
     const written = url.get('written');
     const makeMainContext = (data) => {
         const main = $('#main');
-        const {author, main_category, title, main_posting} = data;
+        const {author, main_category, title, main_posting} = data.main_data;
+        const {tags} = data;
         const $div =  $(
             `<div id="main__context">
                 <h3 id="context__id">${title}</h3>
                 <h4 id="context__author">글쓴이: ${author}</h4>
                 <p id="context__written">${main_posting}</p>
-                <span id="context__category">#${main_category}</span>
+                <div id="context__category">
+                    <span class="categories">#${main_category}</span>
+                </div>
             </div>`);
         main.append($div);
+        const category = $('#context__category');
+        tags.forEach((tag) => {
+            category.append(
+                `<span class="categories">#${tag}</span>
+            `);
+        });
+
     }
 
     axios({
@@ -21,6 +31,7 @@ $(document).ready(() => {
         cacheControl: 'no-cache',
     })
         .then((response) => {
+            console.log(response);
             makeMainContext(response.data);
         })
         .catch((err) => {

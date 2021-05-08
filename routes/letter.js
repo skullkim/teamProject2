@@ -2,6 +2,8 @@ const express = require('express');
 const {isLoggedIn} = require('./middlewares');
 const Posting = require('../models/postings');
 const User = require('../models/users');
+const Tag = require('../models/tags');
+const PostTag = require('../models/post_tag');
 const fs = require('fs');
 const path = require('path');
 const util = require('util');
@@ -31,15 +33,33 @@ router.get('/written', (req, res, next) => {
 router.get('/letter-context', async (req, res, next) => {
     try{
         const written = req.query.written;
-        const context = await Posting.findOne({
+        const posting = await Posting.findOne({
             where: {id: written},
         });
-        const id = context.dataValues.author;
+        const tags = await posting.getTags();
+        const tag_arr = new Array();
+        tags.forEach((e) => {
+            tag_arr.push(e.tag);
+        });
+        console.log(tag_arr);
+        //console.log(tags.foreach((e) => ));
+       //  console.log(context.id);
+       // const tmp = await Tag.findAll({
+       //     where: {id: context.id},
+       //     include:{model: Posting},
+       // });
+       //  console.log(tmp);
+
+        const id = posting.dataValues.author;
         const ex_user = await User.findOne({
             where: {id},
         });
-        context.dataValues.author = ex_user.name;
-        res.send(JSON.stringify(context.dataValues));
+        posting.dataValues.author = ex_user.name;
+        const response = {
+            "main_data": posting.dataValues,
+            "tags" : tag_arr,
+        };
+        res.send(JSON.stringify(response));
     }
     catch(err){
         console.error(err);

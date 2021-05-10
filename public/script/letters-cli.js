@@ -26,7 +26,7 @@ $(document).ready(() => {
         })
         .catch((err) => {
             console.error(err);
-        })
+        });
     axios.get('/auth/postings')
         .then((res) => {
             res.data.forEach((written) => {

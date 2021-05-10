@@ -9,9 +9,12 @@ $(document).ready(() => {
         const search_scope = getSearchScope();
        if(!search_scope){
            alert('검색 범위를 선택하세요');
+           return;
        }
        else if(!search_target){
            alert('검색어를 입력하세요');
+           return;
        }
-    })
+       location.href=`/letter/result?scope=${search_scope}&target=${search_target}`;
+    });
 })

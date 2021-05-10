@@ -53,6 +53,33 @@ router.get('/new-password', isNotLoggedIn, (req, res, next) => {
         console.error(err);
         next(err);
     }
+});
+
+router.put('/confirm-new-password', isNotLoggedIn, async (req, res, next) => {
+    try{
+        //console.log(req.body);
+        const {email, password} = req.body;
+        const ex_user = await User.findOne({
+            where: {email},
+        });
+        if(ex_user){
+            const hash_passwd = await bcrypt.hash(password, 12);
+            await User.update({
+                password: hash_passwd,
+            },{
+                where: {email}
+            });
+            res.send('success');
+        }
+        else{
+            res.send({err: 'incorrect email address'});
+        }
+    }
+
+    catch(err){
+        console.error(err);
+        next(err);
+    }
 })
 
 //kakao login

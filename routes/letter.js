@@ -71,6 +71,16 @@ router.post('/tags', async (req, res, next) => {
         console.error(err);
         next(err);
     }
+});
+
+router.get('/result', (req, res, next) => {
+    try{
+        res.render('search-result', {isLoggedIn: req.isAuthenticated()});
+    }
+    catch(err){
+        console.error(err);
+        next(err);
+    }
 })
 
 module.exports = router;

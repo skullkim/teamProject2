@@ -96,4 +96,27 @@ router.get('/categories', async(req, res, next) => {
     }
 })
 
+router.get('/search-title', async(req, res, next) => {
+    try{
+        const {target} = req.query;
+        const written = await Posting.findOne({
+            where: {title: target},
+        });
+        const author = await User.findOne({
+            where: {id: written.author},
+        });
+        const {name} = author;
+        const {title} = written;
+        const response ={
+            author: name,
+            title,
+        };
+        res.send(response);
+    }
+    catch(err){
+        console.error(err);
+        next(err);
+    }
+})
+
 module.exports = router;

@@ -16,4 +16,20 @@ $(document).ready(() => {
         .catch((err) => {
             console.error(err);
         });
+
+    const url = (new URL(location.href)).searchParams;
+    const scope = url.get('scope');
+    const target = url.get('target');
+    axios({
+        method: 'get',
+        url: `/letter/search-${scope}?target=${target}`,
+        contentType: 'application/json',
+        cacheControl: 'no-cache',
+    })
+        .then((response) => {
+            console.log(response.data);
+        })
+        .catch((err) => {
+            console.error(err);
+        })
 });

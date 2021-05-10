@@ -3,9 +3,13 @@
         <i class="fas fa-list" id="haed__list-logo"></i>
     </a>
     <a href="/">
-<!--        <i class="fas fa-laptop-code" id="head__main-logo"></i>-->
         <img src="/auth/main-logo" alt="main logo" height="100px" width="100px">
     </a>
+    <select name="" id="search-list">
+        <option value="">검색대상 선택</option>
+        <option value="title">글제목</option>
+        <option value="category">카테고리</option>
+    </select>
     <input type="text" id="head__search">
     <i class="fas fa-search" head__search-logo></i>
     {% if is_logged_in %}

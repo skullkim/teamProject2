@@ -64,8 +64,8 @@ router.post('/tags', async (req, res, next) => {
     try{
         const {category} = req.body;
         const readFile = util.promisify(fs.readFile);
-        const tags = JSON.parse(await readFile(path.join(__dirname, '../public/tags.json'), 'utf8'));
         res.send({"tags": tags[category]});
+        const tags = JSON.parse(await readFile(path.join(__dirname, '../public/tags.json'), 'utf8'));
     }
     catch(err){
         console.error(err);
@@ -76,6 +76,19 @@ router.post('/tags', async (req, res, next) => {
 router.get('/result', (req, res, next) => {
     try{
         res.render('search-result', {isLoggedIn: req.isAuthenticated()});
+    }
+    catch(err){
+        console.error(err);
+        next(err);
+    }
+});
+
+router.get('/categories', async(req, res, next) => {
+    try{
+        const readFile = util.promisify(fs.readFile);
+        const categories = await readFile(path.join(__dirname, '../public/tags.json'), 'utf8');
+        const res_data = JSON.parse(categories)
+        res.send(res_data);
     }
     catch(err){
         console.error(err);

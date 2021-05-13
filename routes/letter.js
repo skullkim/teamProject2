@@ -111,4 +111,30 @@ router.get('/search-title', async(req, res, next) => {
     }
 });
 
+router.get('/search-category', async(req, res, next) => {
+    try{
+        const {target} = req.query;
+        const written = await Posting.findAll({
+            where: {main_category: {[Op.like]: `%${target}%`}},
+        });
+         if(written.length){
+            console.log('posting' + written);
+            return res.send(written);
+        }
+        const tag = await Tag.findOne({
+            where: {tag: {[Op.like]: `%${target}%`}},
+        });
+        if(tag){
+            const tag_result = await tag.getPostings();
+            console.log('tag' + tag_result);
+            return res.send(tag_result);
+        }
+         res.send(null);
+    }
+    catch(err){
+        console.error(err);
+        next(err);
+    }
+})
+
 module.exports = router;

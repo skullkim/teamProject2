@@ -37,7 +37,6 @@ $(document).ready(() => {
         cacheControl: 'no-cache',
     })
         .then((res) => {
-            console.log(res);
             if(!res.data.length){
                 main_section.append('<h2>검색결과 없음</h2>');
             }

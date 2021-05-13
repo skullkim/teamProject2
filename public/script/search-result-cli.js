@@ -21,8 +21,7 @@ $(document).ready(() => {
                     ul.append(`<li><a href="">${tag}</a></li>`);
                 });
                 aside.append(ul);
-                //console.log(key, value);
-            })
+            });
         })
         .catch((err) => {
             console.error(err);
@@ -39,10 +38,16 @@ $(document).ready(() => {
     })
         .then((res) => {
             console.log(res);
-            res.data.forEach((written) => {
-                const {main_category, id, title} = written.data;
-                displayWritten(main_category, id, title);
-            });
+            if(!res.data.length){
+                main_section.append('<h2>검색결과 없음</h2>');
+            }
+            else{
+                res.data.forEach((written) => {
+                    console.log(written);
+                    const {main_category, id, title} = written;
+                    displayWritten(main_category, id, title);
+                });
+            }
         })
         .catch((err) => {
             console.error(err);

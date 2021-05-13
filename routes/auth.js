@@ -108,6 +108,16 @@ router.get('/user-info', isLoggedIn, (req, res, next) => {
     }
 });
 
+router.put('/edit-user-info', isLoggedIn, (req, res, next) => {
+    try{
+        console.log(111);
+    }
+    catch(err){
+        console.error(err);
+        next(err);
+    }
+})
+
 router.put('/new-posting', isLoggedIn, async (req, res, next) => {
     try{
         const {title, category, context, tags} = req.body;

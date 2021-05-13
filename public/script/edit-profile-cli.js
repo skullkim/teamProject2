@@ -18,5 +18,28 @@ $(document).ready(() => {
             console.error(err);
         });
 
+    const submit_btn = $('#edit-profile__submit');
+    const name = $('#edit-profile__name');
+    const email = $('#edit-profile__email');
+    const age = $('#edit-profile__age');
+    submit_btn.click(() => {
+        axios({
+            method: 'PUT',
+            url: '/auth/edit-user-info',
+            contentType: 'application/json',
+            cacheControl: 'no-cache',
+            data:{
+                name, email, age
+            }
+        })
+            .then((response) => {
+                const {err} = response.data;
+                if(err){
+
+                } else {
+
+                }
+            })
+    });
 })
 

@@ -103,20 +103,12 @@ router.get('/search-title', async(req, res, next) => {
         const written = await Posting.findAll({
             where: {title: {[Op.like]: `%${target}%`}},
         });
-        // console.log(written);
-        // const {id, title, main_category} = written;
-        // const response ={
-        //     main_category,
-        //     id,
-        //     title,
-        // };
-        //console.log(response);
         res.send(written);
     }
     catch(err){
         console.error(err);
         next(err);
     }
-})
+});
 
 module.exports = router;

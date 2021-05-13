@@ -1,4 +1,15 @@
 $(document).ready(() => {
+    const main_section = $('#main__search-result');
+    const displayWritten = (category, id, title) => {
+        const $written = $(
+            `<div>
+            <h2><a href=/letter/written?written=${id}>${title}</a></h2>
+             <span>
+                 category: <a href="/letter/categories?category=${category}">${category}</a>    
+             </span>
+        </div>`);
+        main_section.append($written);
+    }
     axios.get('/letter/categories')
         .then((res) => {
             const categories = res.data;
@@ -26,8 +37,12 @@ $(document).ready(() => {
         contentType: 'application/json',
         cacheControl: 'no-cache',
     })
-        .then((response) => {
-            console.log(response.data);
+        .then((res) => {
+            console.log(res);
+            res.data.forEach((written) => {
+                const {main_category, id, title} = written.data;
+                displayWritten(main_category, id, title);
+            });
         })
         .catch((err) => {
             console.error(err);

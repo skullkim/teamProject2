@@ -55,28 +55,6 @@ router.get('/profile-img', isLoggedIn, (req, res, next) => {
     }
 });
 
-router.get('/main-logo', (req, res, next) => {
-    try{
-        const s3 = new AWS.S3();
-        s3.getObject({
-            Bucket: `${process.env.AWS_S3_BUCKET}`,
-            Key: `${process.env.MAIN_LOGO_KEY}`,
-        }, (err, data) => {
-            if(err){
-                console.error(err);
-            }
-            else{
-                res.write(data.Body, 'binary');
-                res.end(null, 'binary');
-            }
-        });
-    }
-    catch(err){
-        console.error(err);
-        next(err);
-    }
-});
-
 router.get('/edit-password', isLoggedIn, (req, res, next) => {
     try{
         res.render('edit-password', {is_logged_in: true});
@@ -178,26 +156,5 @@ router.get('/postings', async (req, res, next) => {
     }
 });
 
-router.get('/footer-img', async(req, res, next) => {
-    try{
-        const s3 = new AWS.S3();
-        s3.getObject({
-            Bucket: `${process.env.AWS_S3_BUCKET}`,
-            Key: `${process.env.FOOTER_LOGO_KEY}`,
-        }, (err, data) => {
-            if(err){
-                console.error(err);
-            }
-            else{
-                res.write(data.Body, 'binary');
-                res.end(null, 'binary');
-            }
-        });
-    }
-    catch(err){
-        console.error(err);
-        next(err);
-    }
-})
 
 module.exports = router;

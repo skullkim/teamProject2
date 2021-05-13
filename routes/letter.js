@@ -7,6 +7,7 @@ const PostTag = require('../models/post_tag');
 const fs = require('fs');
 const path = require('path');
 const util = require('util');
+const {Op} = require("sequelize");
 
 const router = express.Router();
 
@@ -99,19 +100,18 @@ router.get('/categories', async(req, res, next) => {
 router.get('/search-title', async(req, res, next) => {
     try{
         const {target} = req.query;
-        const written = await Posting.findOne({
-            where: {title: target},
+        const written = await Posting.findAll({
+            where: {title: {[Op.like]: `%${target}%`}},
         });
-        const author = await User.findOne({
-            where: {id: written.author},
-        });
-        const {name} = author;
-        const {title} = written;
+        console.log(written);
+        const {id, title, main_category} = written;
         const response ={
-            author: name,
+            main_category,
+            id,
             title,
         };
-        res.send(response);
+        console.log(response);
+        res.send(JSON.stringify(response));
     }
     catch(err){
         console.error(err);

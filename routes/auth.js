@@ -108,9 +108,44 @@ router.get('/user-info', isLoggedIn, (req, res, next) => {
     }
 });
 
-router.put('/edit-user-info', isLoggedIn, (req, res, next) => {
+router.put('/edit-user-info', isLoggedIn, async (req, res, next) => {
     try{
-        console.log(111);
+        const {id, login_as} = req.user;
+        if(login_as){
+            return res.send({err: 'you can only change profile when you login locally'});
+        }
+        const {name, email, age} = req.body
+        const ex_name = await User.findOne({
+            where: {name},
+        });
+        if(ex_name){
+            return res.send({err: 'Same name already exists'})
+        }
+        const ex_email = await User.findOne({
+            where: {email},
+        });
+        if(ex_email){
+            return res.send({err: 'Same email already exists'});
+        }
+        if(name){
+            await User.update(
+                {name},
+                {where: {id}}
+            );
+        }
+        if(email){
+            await User.update(
+                {email},
+                {where: {id}}
+            );
+        }
+        if(age){
+            await User.update(
+                {age},
+                {where: {id}}
+            );
+        }
+        res.send({success: 'success'});
     }
     catch(err){
         console.error(err);

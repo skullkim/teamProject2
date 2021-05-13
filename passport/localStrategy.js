@@ -15,6 +15,10 @@ module.exports = () => {
             if(ex_user){
                 const correct_password = await bcrypt.compare(password, ex_user.password);
                 console.log(correct_password);
+                // await User.update(
+                //     {login_as: null},
+                //     {where:{email}},
+                // );
                 correct_password ? done(null, ex_user) : done(null, false, {err: 'wrong password'});
             }
             else{

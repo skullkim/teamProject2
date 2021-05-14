@@ -10,6 +10,10 @@
     {% include "header.html" %}
     <main id="main">
         <section id="main__edit-profile">
+            <div id="edit-profile__img">
+                <label for="img__choose">Avatar</label>
+                <input type="file" value="Avatar" name="profile_img" id="img__choose">
+            </div>
             <input type="text" placeholder="" id="edit-profile__name">
             <input type="email" placeholder="" id="edit-profile__email">
             <input type="text" placeholder="" id="edit-profile__age">

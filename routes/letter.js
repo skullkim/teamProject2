@@ -65,8 +65,8 @@ router.post('/tags', async (req, res, next) => {
     try{
         const {category} = req.body;
         const readFile = util.promisify(fs.readFile);
-        res.send({"tags": tags[category]});
         const tags = JSON.parse(await readFile(path.join(__dirname, '../public/tags.json'), 'utf8'));
+        res.send({"tags": tags[category]});
     }
     catch(err){
         console.error(err);

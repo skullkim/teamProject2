@@ -9,17 +9,17 @@
 <body>
     {% include "header.html" %}
     <main id="main">
-        <section id="main__edit-profile">
+        <form action="/auth/edit-user-info" method="POST" enctype="multipart/form-data" id="main__edit-profile">
             <div id="edit-profile__img">
                 <label for="img__choose">Avatar</label>
                 <input type="file" value="Avatar" name="profile_img" id="img__choose">
             </div>
-            <input type="text" placeholder="" id="edit-profile__name">
-            <input type="email" placeholder="" id="edit-profile__email">
-            <input type="text" placeholder="" id="edit-profile__age">
+            <input type="text" placeholder="" name="name" id="edit-profile__name">
+            <input type="email" placeholder="" name="email" id="edit-profile__email">
+            <input type="text" placeholder="" name="age" id="edit-profile__age">
             <button id="edit-profile__submit">change profile</button>
-            <span id="edit-profile__message"></span>
-        </section>
+            <span id="edit-profile__message">{{message}}</span>
+        </form>
     </main>
     {% include "common-script.html" %}
     {% include "footer.html" %}

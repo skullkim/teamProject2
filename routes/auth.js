@@ -1,6 +1,6 @@
 const express = require('express');
 const AWS = require('aws-sdk');
-const{isLoggedIn, isNotLoggedIn, AwsConfig} = require('./middlewares');
+const{isLoggedIn, isNotLoggedIn, AwsConfig, uploadProfileImage} = require('./middlewares');
 const User = require("../models/users");
 const Posting = require('../models/postings');
 const Tag = require('../models/tags');
@@ -89,7 +89,7 @@ router.put('/confirm-edit-password', isLoggedIn, async (req, res, next) => {
 
 router.get('/edit-profile', isLoggedIn, (req, res, next) => {
     try{
-        res.render('edit-profile', {is_logged_in: true});
+        res.render('edit-profile', {is_logged_in: true, message: req.flash('message')});
     }
     catch(err){
         console.error(err);
@@ -108,24 +108,57 @@ router.get('/user-info', isLoggedIn, (req, res, next) => {
     }
 });
 
-router.put('/edit-user-info', isLoggedIn, async (req, res, next) => {
+const checkAge = (age) => {
+    const reg_age = /^[0-9]*$/;
+    return !reg_age.test(age) ? false : true;
+}
+
+router.post('/edit-user-info', isLoggedIn, uploadProfileImage.single('profile_img'), async (req, res, next) => {
     try{
-        const {id, login_as} = req.user;
+        const {id, login_as, profile_key} = req.user;
         if(login_as){
-            return res.send({err: 'you can only change profile when you login locally'});
+            req.flash('message', 'you can only change profile when you login locally');
+            res.redirect('/auth/edit-profile');
         }
         const {name, email, age} = req.body
-        const ex_name = await User.findOne({
-            where: {name},
-        });
-        if(ex_name){
-            return res.send({err: 'Same name already exists'})
+        console.log("body", name, email, age);
+        //이름 중복
+        if(name){
+            const ex_name = await User.findOne({
+                where: {name},
+            });
+            if(ex_name){
+                req.flash('message', 'Same name already exists');
+                res.redirect('/auth/edit-profile');
+            }
         }
-        const ex_email = await User.findOne({
-            where: {email},
-        });
-        if(ex_email){
-            return res.send({err: 'Same email already exists'});
+        //email 중
+        if(email){
+            const ex_email = await User.findOne({
+                where: {email},
+            });
+            if(ex_email){
+                req.flash('message', 'Same email already exists');
+                res.redirect('/auth/edit-profile');
+            }
+        }
+        if(!checkAge(age)){
+            req.flash('message', 'incorrect age');
+            res.redirect('/auth/edit-profile');
+        }
+        if(req.file){
+            const {location, key} = req.file;
+            await User.update({
+                profile_key: `${key}`,
+            }, {where: {id}});
+            const s3 = new AWS.S3();
+            s3.deleteObject({
+                Bucket: `${process.env.AWS_S3_BUCKET}`,
+                Key: `${profile_key}`,
+            }, (err, data) => {
+                err ? console.error(err) : console.log('local profile image deleted');
+            })
+
         }
         if(name){
             await User.update(
@@ -145,7 +178,7 @@ router.put('/edit-user-info', isLoggedIn, async (req, res, next) => {
                 {where: {id}}
             );
         }
-        res.send({success: 'success'});
+        res.redirect('/auth/profile')
     }
     catch(err){
         console.error(err);

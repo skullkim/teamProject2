@@ -14,7 +14,7 @@ $(document).ready(() => {
                     <span class="categories">#${main_category}</span>
                 </div>
             </div>`);
-        main.append($div);
+        main.prepend($div);
         const category = $('#context__category');
         tags.forEach((tag) => {
             category.append(
@@ -36,5 +36,5 @@ $(document).ready(() => {
         })
         .catch((err) => {
             console.error(err);
-        })
+        });
 })

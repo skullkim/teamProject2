@@ -23,7 +23,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/written', (req, res, next) => {
     try{
-        res.render('posting', {is_logged_int: req.isAuthenticated()});
+        res.render('posting', {is_logged_in: req.isAuthenticated()});
     }
     catch(err){
         console.error(err);
@@ -76,7 +76,7 @@ router.post('/tags', async (req, res, next) => {
 
 router.get('/result', (req, res, next) => {
     try{
-        res.render('search-result', {isLoggedIn: req.isAuthenticated()});
+        res.render('search-result', {is_logged_in: req.isAuthenticated()});
     }
     catch(err){
         console.error(err);

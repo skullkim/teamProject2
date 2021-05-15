@@ -7,6 +7,8 @@ $(document).ready(() => {
              <span>
                  category: <a href="/letter/categories?category=${category}">${category}</a>    
              </span>
+             <a href="/auth/edit-posting?written=${id}">수정</a>
+             <a href="/auth/remove-posting?written=${id}">삭제</a>
         </div>`);
         my_postings.append($written);
     }

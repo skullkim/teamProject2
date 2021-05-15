@@ -264,6 +264,16 @@ router.get('/wrote-postings', isLoggedIn, async(req, res, next) => {
         console.error(err);
         next(err);
     }
+});
+
+router.get('/edit-posting', isLoggedIn, (req, res, next) => {
+    try{
+        res.render('edit-posting', {is_logged_in: true});
+    }
+    catch(err){
+        console.error(err);
+        next(err);
+    }
 })
 
 module.exports = router;

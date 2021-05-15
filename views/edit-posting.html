@@ -2,15 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style/common-style.css">
-    <title>Fix posting</title>
+    <title>Title</title>
 </head>
 <body>
     {% include "header.html" %}
     <main id="main">
-        <section id="main__posting">
-            <input type="text" placeholder="" id="posting__title">
+        <article id="main__post">
+            <input type="text" placeholder="제목" id="post__title">
             <select name="" id="post__category">
                 <option>=== 글 카테고리 ===</option>
                 <option value="알고리즘">알고리즘</option>
@@ -21,11 +19,12 @@
                 <option value="자유게시판">자유게시판</option>
             </select>
             <div id="post__tag"></div>
-            <textarea name="posting__context" id="posting__context" cols="30" rows="10"></textarea>
-            <input type="text" id="posting__submit">
-        </section>
+            <textarea name="" id="post__main-context" cols="30" rows="10"></textarea>
+            <input type="submit" id="new-post__submit">
+            <span id="message"></span>
+        </article>
     </main>
     {% include "footer.html" %}
-    {% include "common-script.html" }
+    {% include "common-script.html" %}
 </body>
 </html>

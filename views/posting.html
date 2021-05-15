@@ -9,10 +9,12 @@
 <body>
     {% include "header.html" %}
     <main id="main">
+        {% if is_logged_in %}
         <section id="main__comment-input">
             <textarea name="comment" id="comment-input__comment" cols="30" rows="5"></textarea>
             <input type="submit" value="입력" id="comment-input__submit">
         </section>
+        {% endif %}
         <section id="main__comments"></section>
     </main>
     {% include "footer.html" %}

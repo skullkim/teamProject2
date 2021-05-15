@@ -42,7 +42,21 @@ $(document).ready(() => {
     const comment_submit = $('#comment-input__submit');
     comment_submit.click(() => {
        const comment = $('#comment-input__comment').val();
-       console.log(comment);
+       axios({
+           method: 'PUT',
+           url: '/auth/new-comment',
+           contentType: 'application/json',
+           cacheControl: 'no-cache',
+           data: {
+               comment,
+           }
+       })
+           .then((response) => {
+               console.log(response);
+           })
+           .catch((err) => {
+               console.error(err);
+           })
     });
 
 })

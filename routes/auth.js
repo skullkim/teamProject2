@@ -234,5 +234,14 @@ router.get('/postings', async (req, res, next) => {
     }
 });
 
+router.put('/new-comment', async(req, res, next) => {
+    try{
+        const {comment} = req.body;
+    }
+    catch(err){
+        console.error(err);
+        next(err);
+    }
+})
 
 module.exports = router;

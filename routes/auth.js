@@ -4,7 +4,7 @@ const{isLoggedIn, isNotLoggedIn, AwsConfig, uploadProfileImage} = require('./mid
 const User = require("../models/users");
 const Posting = require('../models/postings');
 const Tag = require('../models/tags');
-const PostTag = require('../models/post_tag');
+const Comment = require('../models/comments');
 const bcrypt = require('bcrypt');
 
 const router = express.Router();
@@ -234,9 +234,16 @@ router.get('/postings', async (req, res, next) => {
     }
 });
 
-router.put('/new-comment', async(req, res, next) => {
+router.put('/new-comment', isLoggedIn, async(req, res, next) => {
     try{
-        const {comment} = req.body;
+        const {comment, written} = req.body;
+        const {id} = req.user;
+        await Comment.create({
+            commenter: id,
+            posting_id: written,
+            comment: comment,
+        });
+        res.send('success');
     }
     catch(err){
         console.error(err);

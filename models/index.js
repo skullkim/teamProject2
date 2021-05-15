@@ -3,7 +3,7 @@ const User = require('./users');
 const Token = require('./token');
 const Posting = require('./postings');
 const Tag = require('./tags');
-//const PostTag = require('./post_tag');
+const Comment = require('./comments');
 
 const env = process.env.NODE_DEV || 'development';
 const config = require('../config/config')[env];
@@ -18,17 +18,18 @@ db.User = User;
 db.Token = Token;
 db.Posting = Posting;
 db.Tag = Tag;
-//db.PostTag = PostTag;
+db.Comment = Comment;
 
 User.init(sequelize);
 Token.init(sequelize);
 Posting.init(sequelize);
 Tag.init(sequelize);
-//PostTag.init(sequelize);
+Comment.init(sequelize);
 
 User.associate(db);
 Token.associate(db);
 Posting.associate(db);
 Tag.associate(db);
+Comment.associate(db);
 
 module.exports = db;

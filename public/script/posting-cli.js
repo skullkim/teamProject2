@@ -49,10 +49,11 @@ $(document).ready(() => {
            cacheControl: 'no-cache',
            data: {
                comment,
+               written,
            }
        })
            .then((response) => {
-               console.log(response);
+               console.log('success');
            })
            .catch((err) => {
                console.error(err);

@@ -24,6 +24,7 @@ $(document).ready(() => {
         });
 
     }
+    //댓글 정보를 페이지에 로딩
     const comment_area = $('#main__comments');
     const makeComment = (name, comment) => {
         const div = $(`
@@ -48,6 +49,21 @@ $(document).ready(() => {
         .catch((err) => {
             console.error(err);
         });
+    //댓글 가져오기
+    axios({
+        method: "get",
+        url: `/letter/letter-comments?written=${written}`,
+        contentType: 'application/json',
+        cacheControl: 'no-cache',
+    })
+        .then((response) => {
+            response.data.forEach((comment) => {
+                makeComment(comment.commenter, comment.comment);
+            });
+        })
+        .catch((err) => {
+            console.error(err);
+        })
 //작성한 댓글 추가
     const comment_submit = $('#comment-input__submit');
     comment_submit.click(() => {
@@ -64,7 +80,7 @@ $(document).ready(() => {
        })
            .then((response) => {
                const {name} = response.data;
-               console.log(name);
+               //console.log(name);
                makeComment(name, comment);
            })
            .catch((err) => {

@@ -3,7 +3,7 @@ const {isLoggedIn} = require('./middlewares');
 const Posting = require('../models/postings');
 const User = require('../models/users');
 const Tag = require('../models/tags');
-const PostTag = require('../models/post_tag');
+const Comment = require('../models/comments');
 const fs = require('fs');
 const path = require('path');
 const util = require('util');
@@ -130,6 +130,20 @@ router.get('/search-category', async(req, res, next) => {
             return res.send(tag_result);
         }
          res.send(null);
+    }
+    catch(err){
+        console.error(err);
+        next(err);
+    }
+});
+
+router.get('/letter-comments', async(req, res, next) => {
+    try{
+        const {written} = req.query;
+        const comments = await Comment.findAll({
+            where: {posting_id: written}
+        });
+        res.send(comments);
     }
     catch(err){
         console.error(err);

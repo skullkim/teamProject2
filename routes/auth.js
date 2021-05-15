@@ -237,9 +237,10 @@ router.get('/postings', async (req, res, next) => {
 router.put('/new-comment', isLoggedIn, async(req, res, next) => {
     try{
         const {comment, written} = req.body;
-        const {id} = req.user;
+        const {id, name} = req.user;
         await Comment.create({
-            commenter: id,
+            commenter_id: id,
+            commenter: name,
             posting_id: written,
             comment: comment,
         });

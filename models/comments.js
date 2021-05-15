@@ -3,8 +3,12 @@ const Sequelize = require('sequelize');
 module.exports = class Comment extends Sequelize.Model{
     static init(sequelize){
         return super.init({
-            commenter: {
+            commenter_id: {
                 type: Sequelize.INTEGER,
+                allowNull: false,
+            },
+            commenter: {
+                type: Sequelize.STRING(100),
                 allowNull: false,
             },
             posting_id: {
@@ -27,7 +31,7 @@ module.exports = class Comment extends Sequelize.Model{
         });
     }
     static associate(db){
-        db.Comment.belongsTo(db.User, {foreignKey: 'commenter', targetKey: 'id'});
+        db.Comment.belongsTo(db.User, {foreignKey: 'commenter_id', targetKey: 'id'});
         db.Comment.belongsTo(db.Posting, {foreignKey: 'posting_id', tagetKey: 'id'});
     }
 }

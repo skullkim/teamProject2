@@ -1,6 +1,7 @@
 $(document).ready(() => {
     const url = (new URL(location.href)).searchParams;
     const written = url.get('written');
+    //글에대한 정보를 페이지에 로딩
     const makeMainContext = (data) => {
         const main = $('#main');
         const {author, main_category, title, main_posting} = data.main_data;
@@ -23,7 +24,7 @@ $(document).ready(() => {
         });
 
     }
-
+//글 가져오기
     axios({
         method: "get",
         url: `/letter/letter-context?written=${written}`,
@@ -37,4 +38,11 @@ $(document).ready(() => {
         .catch((err) => {
             console.error(err);
         });
+
+    const comment_submit = $('#comment-input__submit');
+    comment_submit.click(() => {
+       const comment = $('#comment-input__comment').val();
+       console.log(comment);
+    });
+
 })

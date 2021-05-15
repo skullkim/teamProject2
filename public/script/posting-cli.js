@@ -38,7 +38,7 @@ $(document).ready(() => {
         .catch((err) => {
             console.error(err);
         });
-
+//작성한 댓글 추가
     const comment_submit = $('#comment-input__submit');
     comment_submit.click(() => {
        const comment = $('#comment-input__comment').val();

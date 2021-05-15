@@ -24,6 +24,16 @@ $(document).ready(() => {
         });
 
     }
+    const comment_area = $('#main__comments');
+    const makeComment = (name, comment) => {
+        const div = $(`
+            <div class="comments">
+                <p>${name}</p>
+                <p>${comment}</p>
+            </div>
+        `);
+        comment_area.append(div);
+    }
 //글 가져오기
     axios({
         method: "get",
@@ -53,7 +63,9 @@ $(document).ready(() => {
            }
        })
            .then((response) => {
-               console.log('success');
+               const {name} = response.data;
+               console.log(name);
+               makeComment(name, comment);
            })
            .catch((err) => {
                console.error(err);

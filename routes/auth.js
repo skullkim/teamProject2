@@ -243,7 +243,7 @@ router.put('/new-comment', isLoggedIn, async(req, res, next) => {
             posting_id: written,
             comment: comment,
         });
-        res.send('success');
+        res.send({name: req.user.name});
     }
     catch(err){
         console.error(err);

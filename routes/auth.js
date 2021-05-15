@@ -250,6 +250,20 @@ router.put('/new-comment', isLoggedIn, async(req, res, next) => {
         console.error(err);
         next(err);
     }
+});
+
+router.get('/wrote-postings', isLoggedIn, async(req, res, next) => {
+    try{
+        const {id} = req.user;
+        const postings = await Posting.findAll({
+            where: {author: id},
+        });
+        res.send(postings);
+    }
+    catch(err){
+        console.error(err);
+        next(err);
+    }
 })
 
 module.exports = router;

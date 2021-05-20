@@ -7,6 +7,7 @@ const Comment = require('../models/comments');
 const fs = require('fs');
 const path = require('path');
 const util = require('util');
+const axios = require("axios");
 const {Op} = require("sequelize");
 
 const router = express.Router();
@@ -114,21 +115,42 @@ router.get('/search-title', async(req, res, next) => {
 router.get('/search-category', async(req, res, next) => {
     try{
         const {target} = req.query;
-        const written = await Posting.findAll({
-            where: {main_category: {[Op.like]: `%${target}%`}},
-        });
-         if(written.length){
-            console.log('posting' + written);
-            return res.send(written);
+        if(target === '도서 추천'){
+            const title = '프로그래밍';
+            axios({
+                method: 'GET',
+                url: `https://dapi.kakao.com/v3/search/book?target=title`,
+                headers: {Authorization: `KakaoAK ${process.env.KAKAO_CLIENT_ID}`},
+                params: {
+                    query: `${title}`,
+                },
+            })
+                .then((response) => {
+                    const {documents} = response.data;
+                    res.send(response.data.documents);
+                })
+                .catch((err) => {
+                    console.error(err);
+                })
         }
-        const tag = await Tag.findOne({
-            where: {tag: {[Op.like]: `%${target}%`}},
-        });
-        if(tag){
-            const tag_result = await tag.getPostings();
-            console.log('tag' + tag_result);
-            return res.send(tag_result);
+        else{
+            const written = await Posting.findAll({
+                where: {main_category: {[Op.like]: `%${target}%`}},
+            });
+            if(written.length){
+                console.log('posting' + written);
+                return res.send(written);
+            }
+            const tag = await Tag.findOne({
+                where: {tag: {[Op.like]: `%${target}%`}},
+            });
+            if(tag){
+                const tag_result = await tag.getPostings();
+                console.log('tag' + tag_result);
+                return res.send(tag_result);
+            }
         }
+
          res.send(null);
     }
     catch(err){

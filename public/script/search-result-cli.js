@@ -10,6 +10,22 @@ $(document).ready(() => {
         </div>`);
         main_section.append($written);
     }
+    const displayBook = (books) => {
+        books.forEach((book) => {
+            const{authors, thumbnail, title, contents} = book;
+            console.log(authors, thumbnail, title, contents);
+            const book_intro = $(`
+                    <div>
+                        <p>제목:${title}</p>
+                        <img src="${thumbnail}" alt="book thumbnail">
+                        <p>저자:${authors}</p>
+                        <p>${contents}</p>
+                    </div>
+            `);
+            main_section.append(book_intro);
+        })
+
+    }
     axios.get('/letter/categories')
         .then((res) => {
             const categories = res.data;
@@ -50,7 +66,7 @@ $(document).ready(() => {
                 });
             }
             else{
-                console.log(res);
+                displayBook(res.data);
             }
         })
         .catch((err) => {

@@ -5,7 +5,7 @@ $(document).ready(() => {
     const makeMainContext = (data) => {
         const main = $('#main');
         const {author, main_category, title, main_posting} = data.main_data;
-        const {tags} = data;
+        const {tags, posting_id, images} = data;
         const $div =  $(
             `<div id="main__context">
                 <h3 id="context__id">${title}</h3>
@@ -16,6 +16,15 @@ $(document).ready(() => {
                 </div>
             </div>`);
         main.prepend($div);
+        const context_category = $('#context__category');
+        const img_div = (`<div id="context__images"></div>`);
+        context_category.before(img_div);
+        const image = $('#context__images');
+        images.forEach((img) => {
+            image.append(`
+                <img src="/letter/posting-images?post_id=${posting_id}&img_id=${img.id}" alt="posting images">
+            `);
+        });
         const category = $('#context__category');
         tags.forEach((tag) => {
             category.append(
@@ -43,7 +52,7 @@ $(document).ready(() => {
         cacheControl: 'no-cache',
     })
         .then((response) => {
-            console.log(response);
+            console.log(response.data.posting_id);
             makeMainContext(response.data);
         })
         .catch((err) => {

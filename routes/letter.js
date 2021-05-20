@@ -4,6 +4,9 @@ const Posting = require('../models/postings');
 const User = require('../models/users');
 const Tag = require('../models/tags');
 const Comment = require('../models/comments');
+const PostingImages = require('../models/posting_images');
+const {AwsConfig} = require('../routes/middlewares');
+const AWS = require('aws-sdk');
 const fs = require('fs');
 const path = require('path');
 const util = require('util');
@@ -44,7 +47,12 @@ router.get('/letter-context', async (req, res, next) => {
             tag_arr.push(e.tag);
         });
         //console.log(tag_arr);
-
+        const imgs = await PostingImages.findAll({
+            attributes: ['id'],
+            where: {post_id: posting.id},
+        });
+        console.log(imgs);
+        // console.log(posting.id);
         const id = posting.dataValues.author;
         const ex_user = await User.findOne({
             where: {id},
@@ -53,6 +61,8 @@ router.get('/letter-context', async (req, res, next) => {
         const response = {
             "main_data": posting.dataValues,
             "tags" : tag_arr,
+            "posting_id" : posting.id,
+            "images": imgs,
         };
         res.send(JSON.stringify(response));
     }
@@ -74,6 +84,17 @@ router.post('/tags', async (req, res, next) => {
         next(err);
     }
 });
+
+router.get('/posting-images', async(req, res, next) => {
+    try{
+        const {post_id, img_id} = req.query;
+        console.log(post_id, img_id);
+    }
+    catch(err){
+        console.error(err);
+        next(err);
+    }
+})
 
 router.get('/result', (req, res, next) => {
     try{

@@ -206,13 +206,13 @@ router.put('/new-posting', isLoggedIn, async (req, res, next) => {
             });
             const result = await Promise.all(
                 tags.map((tag) => {
-                    return Tag.findOrCreate({
-                        where: {tag},
+                    return Tag.create({
+                        tag
                     });
                 })
             );
             //console.log(result);
-            await posting.addTags(result.map(r => r[0]));
+            await posting.addTags(result.map(r => r.id));
 
             res.send({success: 'success'});
         }
@@ -274,6 +274,53 @@ router.get('/edit-posting', isLoggedIn, (req, res, next) => {
         console.error(err);
         next(err);
     }
-})
+});
+
+router.put('/confirm-edit-posting', isLoggedIn, async(req, res, next) => {
+    try{
+        const {title, category, context, tags, prev_title} = req.body;
+        const {id} = req.user;
+        const ex_posting =  await Posting.findOne({
+            where: {title}
+        });
+        if(ex_posting && ex_posting.author != id){
+            res.send({err: 'same title exist'});
+        }
+        else{
+            await Posting.update({
+                title,
+                main_posting: `${context}`,
+                main_category: `${category}`,
+            },{
+                where: {title: prev_title},
+            });
+            const posting = await Posting.findOne({
+                where: {title}
+            });
+            const prev_tags = await posting.getTags();
+            await Promise.all(
+                prev_tags.map((tag) => {
+                    posting.removeTag(tag.id);
+                })
+            );
+             const result = await Promise.all(
+                tags.map((tag) => {
+                    return Tag.create({
+                        tag
+                    });
+                })
+            );
+            console.log(result);
+            await posting.addTags(result.map(r => r.id));
+
+             res.send({success: 'success'});
+        }
+    }
+    catch(err){
+        console.error(err);
+        next(err);
+    }
+
+});
 
 module.exports = router;

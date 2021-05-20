@@ -1,6 +1,6 @@
 const express = require('express');
 const AWS = require('aws-sdk');
-const{isLoggedIn, isNotLoggedIn, AwsConfig, uploadProfileImage} = require('./middlewares');
+const{isLoggedIn, isNotLoggedIn, AwsConfig, uploadProfileImage, uploadPostingImages} = require('./middlewares');
 const User = require("../models/users");
 const Posting = require('../models/postings');
 const Tag = require('../models/tags');
@@ -186,11 +186,11 @@ router.post('/edit-user-info', isLoggedIn, uploadProfileImage.single('profile_im
     }
 })
 
-router.post('/new-posting', isLoggedIn, async (req, res, next) => {
+router.post('/new-posting', isLoggedIn, uploadPostingImages.array('imgs'), async (req, res, next) => {
     try{
         const {title, category, context, tags} = req.body;
         const {id} = req.user;
-        console.log(tags[0]);
+        console.log(req.files);
         const ex_posting =  await Posting.findOne({
             where: {title},
         });
@@ -204,6 +204,7 @@ router.post('/new-posting', isLoggedIn, async (req, res, next) => {
                 main_posting: `${context}`,
                 main_category: `${category}`,
             });
+
             const result = await Promise.all(
                 tags.map((tag) => {
                     return Tag.create({

@@ -88,7 +88,25 @@ router.post('/tags', async (req, res, next) => {
 router.get('/posting-images', async(req, res, next) => {
     try{
         const {post_id, img_id} = req.query;
-        console.log(post_id, img_id);
+        //console.log(post_id, img_id);
+        const s3_key = await PostingImages.findOne({
+            attributes: ['img_key'],
+            where: {id: img_id}
+        });
+        //console.log("s3", s3_key.img_key);
+        const s3 = new AWS.S3();
+        s3.getObject({
+            Bucket: `${process.env.AWS_S3_BUCKET}`,
+            Key: `${s3_key.img_key}`,
+        }, (err, data) => {
+            if(err){
+                console.error(err);
+            }
+            else{
+                res.write(data.Body, 'binary');
+                res.end(null, 'binary');
+            }
+        })
     }
     catch(err){
         console.error(err);

@@ -186,7 +186,7 @@ router.post('/edit-user-info', isLoggedIn, uploadProfileImage.single('profile_im
     }
 })
 
-router.put('/new-posting', isLoggedIn, async (req, res, next) => {
+router.post('/new-posting', isLoggedIn, async (req, res, next) => {
     try{
         const {title, category, context, tags} = req.body;
         const {id} = req.user;
@@ -213,8 +213,8 @@ router.put('/new-posting', isLoggedIn, async (req, res, next) => {
             );
             //console.log(result);
             await posting.addTags(result.map(r => r.id));
-
-            res.send({success: 'success'});
+            res.redirect('/');
+            //res.send({success: 'success'});
         }
     }
     catch(err){

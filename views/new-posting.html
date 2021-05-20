@@ -9,9 +9,9 @@
 <body>
     {% include "header.html" %}
     <main id="main">
-        <article id="new-post">
-            <input type="text" placeholder="제목" id="post__title">
-            <select name="" id="post__category">
+        <form action="/auth/new-posting" method="POST" id="new-post">
+            <input type="text" placeholder="제목" name="title" id="post__title">
+            <select name="category" id="post__category">
                 <option>=== 글 카테고리 ===</option>
                 <option value="알고리즘">알고리즘</option>
                 <option value="스터디">스터디</option>
@@ -21,10 +21,10 @@
                 <option value="자유게시판">자유게시판</option>
             </select>
             <div id="post__tag"></div>
-            <textarea name="" id="post__main-context" cols="30" rows="10"></textarea>
+            <textarea name="context" id="post__main-context" cols="30" rows="10"></textarea>
             <input type="submit" id="new-post__submit">
             <span id="message"></span>
-        </article>
+        </form>
     </main>
     {% include "footer.html" %}
     {% include "common-script.html" %}

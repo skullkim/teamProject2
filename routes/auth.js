@@ -5,6 +5,7 @@ const User = require("../models/users");
 const Posting = require('../models/postings');
 const Tag = require('../models/tags');
 const Comment = require('../models/comments');
+const PostingImage = require('../models/posting_images');
 const bcrypt = require('bcrypt');
 
 const router = express.Router();
@@ -204,6 +205,22 @@ router.post('/new-posting', isLoggedIn, uploadPostingImages.array('imgs'), async
                 main_posting: `${context}`,
                 main_category: `${category}`,
             });
+            const images = req.files;
+            //images.forEach((img) => console.log(e));
+            await Promise.all(
+                images.map((img) => {
+                    PostingImage.create({
+                        post_id: posting.id,
+                        img_key: img.key,
+                    })
+                })
+            );
+            // req.files.forEach((img) => {
+            //     const {key} = img;
+            //     await PostingImage.create({
+            //         post_id
+            //     })
+            // });
 
             const result = await Promise.all(
                 tags.map((tag) => {

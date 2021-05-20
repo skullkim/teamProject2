@@ -37,15 +37,20 @@ $(document).ready(() => {
         cacheControl: 'no-cache',
     })
         .then((res) => {
+            console.log(res);
             if(!res.data.length){
                 main_section.append('<h2>검색결과 없음</h2>');
+                return;
             }
-            else{
+            if(target !== '도서 추천'){
                 res.data.forEach((written) => {
                     console.log(written);
                     const {main_category, id, title} = written;
                     displayWritten(main_category, id, title);
                 });
+            }
+            else{
+                console.log(res);
             }
         })
         .catch((err) => {

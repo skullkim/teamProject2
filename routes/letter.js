@@ -112,28 +112,23 @@ router.get('/search-title', async(req, res, next) => {
     }
 });
 
+const findBook = async () => {
+    const title = '프로그래밍';
+    const result = await axios({
+        method: 'GET',
+        url: `https://dapi.kakao.com/v3/search/book?target=title`,
+        headers: {Authorization: `KakaoAK ${process.env.KAKAO_CLIENT_ID}`},
+        params: {
+            query: `${title}`,
+        },
+    });
+    return result.data.documents;
+}
+
 router.get('/search-category', async(req, res, next) => {
     try{
         const {target} = req.query;
-        if(target === '도서 추천'){
-            const title = '프로그래밍';
-            axios({
-                method: 'GET',
-                url: `https://dapi.kakao.com/v3/search/book?target=title`,
-                headers: {Authorization: `KakaoAK ${process.env.KAKAO_CLIENT_ID}`},
-                params: {
-                    query: `${title}`,
-                },
-            })
-                .then((response) => {
-                    const {documents} = response.data;
-                    res.send(response.data.documents);
-                })
-                .catch((err) => {
-                    console.error(err);
-                })
-        }
-        else{
+        if(target !== '도서 추천'){
             const written = await Posting.findAll({
                 where: {main_category: {[Op.like]: `%${target}%`}},
             });
@@ -150,8 +145,11 @@ router.get('/search-category', async(req, res, next) => {
                 return res.send(tag_result);
             }
         }
+        else{
+            return res.send(await findBook());
+        }
 
-         res.send(null);
+        res.send(null);
     }
     catch(err){
         console.error(err);

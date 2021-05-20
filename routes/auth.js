@@ -320,7 +320,29 @@ router.put('/confirm-edit-posting', isLoggedIn, async(req, res, next) => {
         console.error(err);
         next(err);
     }
-
 });
+
+router.get('/remove-posting', isLoggedIn, async(req, res, next) => {
+    try{
+        const {written} = req.query;
+        const posting = await Posting.findOne({
+            where: {id: written},
+        });
+        const tags = await posting.getTags();
+        await Promise.all(
+            tags.map((tag) => {
+                posting.removeTag(tag.id);
+            })
+        );
+        await Posting.destroy({
+            where: {id: written}
+        });
+        res.redirect('/auth/profile');
+    }
+    catch(err){
+        console.error(err);
+        next(err);
+    }
+})
 
 module.exports = router;

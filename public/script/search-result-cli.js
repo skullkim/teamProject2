@@ -12,11 +12,10 @@ $(document).ready(() => {
     }
     const displayBook = (books) => {
         books.forEach((book) => {
-            const{authors, thumbnail, title, contents} = book;
-            console.log(authors, thumbnail, title, contents);
+            const{authors, thumbnail, title, contents, url} = book;
             const book_intro = $(`
                     <div>
-                        <p>제목:${title}</p>
+                        <p><a href="${url}">제목:${title}</a></p>
                         <img src="${thumbnail}" alt="book thumbnail">
                         <p>저자:${authors}</p>
                         <p>${contents}</p>

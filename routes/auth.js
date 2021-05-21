@@ -427,6 +427,20 @@ router.put('/comments-edit', isLoggedIn, async(req, res, next) => {
         console.error(err);
         next(err);
     }
+});
+
+router.delete('/remove-comment', isLoggedIn, async(req, res, next) => {
+    try{
+        const {id} = req.query;
+        await Comment.destroy({
+            where: {id},
+        });
+        res.send('success');
+    }
+    catch(err){
+        console.error(err);
+        next(err);
+    }
 })
 
 module.exports = router;

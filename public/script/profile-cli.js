@@ -19,7 +19,7 @@ $(document).ready(() => {
                 <span>댓글: ${comment}</span>
 <!--                <button id="comments__edit"><a href="/auth/edit-comment?id=${id}">수정</a></button>-->
                 <button class="comments__edit">수정</input>
-                <button id="comments__remove">삭제</button>
+                <button class="comments__remove">삭제</button>
                 <span class="comment-id" style="visibility: hidden">${id}</span>
             </div>
         `);
@@ -59,8 +59,7 @@ $(document).ready(() => {
             console.error(err);
         });
 
-    //console.log(edit_comment_btn);
-    const edit_comment = $('.comments__edit').firstChild;
+    //댓글 수정
     $(document).on('click', '.comments__edit', function(){
         console.log($(this).next().next().html());
         const id = $(this).next().next().html();
@@ -82,8 +81,26 @@ $(document).ready(() => {
                 console.error(err);
             })
     });
-    // edit_comment_btn.click(() => {
-    //     console.log(1111);
-    //     console.log(edit_comment, $('comment-id').val());
-    // })
+
+    //댓글 삭제
+    $(document).on('click', '.comments__remove', function(){
+        const id = $(this).next().html();
+        const remove = $(this).parent();
+        remove.remove();
+        axios({
+            method: 'delete',
+            url: `/auth/remove-comment?id=${id}`,
+            contentType: 'application/json',
+            cacheControl: 'no-cache',
+            data:{
+                id,
+            }
+        })
+            .then((res) => {
+                console.log('success');
+            })
+            .catch((err) => {
+                console.error(err);
+            })
+    })
 });

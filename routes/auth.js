@@ -416,6 +416,12 @@ router.put('/comments-edit', isLoggedIn, async(req, res, next) => {
     try{
         const {new_comment} = req.body;
         const {id} = req.query;
+        await Comment.update({
+            comment: new_comment
+        }, {
+            where: {id}
+        });
+        res.send('success');
     }
     catch(err){
         console.error(err);

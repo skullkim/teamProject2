@@ -286,7 +286,7 @@ router.get('/wrote-postings', isLoggedIn, async(req, res, next) => {
 
 router.get('/edit-posting', isLoggedIn, (req, res, next) => {
     try{
-        res.render('edit-posting', {is_logged_in: true});
+        res.render('edit-posting', {is_logged_in: true, message: req.flash('message')});
     }
     catch(err){
         console.error(err);
@@ -302,8 +302,12 @@ router.post('/confirm-edit-posting', isLoggedIn, uploadPostingImages.array('imgs
         const ex_posting =  await Posting.findOne({
             where: {title}
         });
-        if(ex_posting && ex_posting.author != id){
-            res.send({err: 'same title exist'});
+        //console.log(ex_posting);
+        if(ex_posting){
+            //res.send({err: 'same title exist'});
+            console.log(1111);
+            req.flash('message', 'same title exist');
+            return res.redirect(`/auth/edit-posting?written=${post_id}`);
         }
         else{
             await Posting.update({
@@ -317,26 +321,22 @@ router.post('/confirm-edit-posting', isLoggedIn, uploadPostingImages.array('imgs
                 where: {title}
             });
             const prev_tags = await posting.getTags();
-            //console.log(prev_tags);
-            if(prev_tags){
+            if(prev_tags && tags){
                 await Promise.all(
                     prev_tags.map((tag) => {
                         posting.removeTag(tag.id);
                     })
                 );
+                const result = await Promise.all(
+                    tags.map((tag) => {
+                        return Tag.create({
+                            tag
+                        });
+                    })
+                );
+                await posting.addTags(result.map(r => r.id));
             }
-            //console.log(tags);
-             const result = await Promise.all(
-                tags.map((tag) => {
-                    return Tag.create({
-                        tag
-                    });
-                })
-            );
-
-            await posting.addTags(result.map(r => r.id));
             const images = req.files;
-            //console.log(req.files);
             if(images){
                 const prev_imgs = await PostingImage.findAll({
                     attributes: ['img_key'],
@@ -364,16 +364,9 @@ router.post('/confirm-edit-posting', isLoggedIn, uploadPostingImages.array('imgs
                         })
                     })
                 );
-                //console.log(prev_imgs);
-                // const s3 = new AWS.S3();
-                // s3.deleteObject({
-                //     Bucket: `${process.env.AWS_S3_BUCKET}`,
-                //     Key: `${}`
-                // })
 
             }
             res.redirect('/auth/profile');
-            //  res.send({success: 'success'});
         }
     }
     catch(err){

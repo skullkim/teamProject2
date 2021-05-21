@@ -286,7 +286,11 @@ router.get('/wrote-postings', isLoggedIn, async(req, res, next) => {
 
 router.get('/wrote-comments', isLoggedIn, async(req, res, next) => {
     try{
-        console.log('comments');
+        const {id} = req.user;
+        const posting = await Comment.findAll({
+            where: {commenter_id: id},
+        });
+        res.send(posting);
     }
     catch(err){
         console.error(err);

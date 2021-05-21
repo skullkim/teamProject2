@@ -34,7 +34,7 @@ $(document).ready(() => {
         cacheControl: 'no-cache',
     })
         .then((response) => {
-
+            console.log(response);
         })
         .catch((err) => {
             console.error(err);

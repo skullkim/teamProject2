@@ -284,6 +284,16 @@ router.get('/wrote-postings', isLoggedIn, async(req, res, next) => {
     }
 });
 
+router.get('/wrote-comments', isLoggedIn, async(req, res, next) => {
+    try{
+        console.log('comments');
+    }
+    catch(err){
+        console.error(err);
+        next(err);
+    }
+})
+
 router.get('/edit-posting', isLoggedIn, (req, res, next) => {
     try{
         res.render('edit-posting', {is_logged_in: true, message: req.flash('message')});

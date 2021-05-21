@@ -26,5 +26,17 @@ $(document).ready(() => {
         })
         .catch((err) => {
             console.error(err);
+        });
+    axios({
+        method: 'get',
+        url: '/auth/wrote-comments',
+        contentType: 'application/json',
+        cacheControl: 'no-cache',
+    })
+        .then((response) => {
+
         })
+        .catch((err) => {
+            console.error(err);
+        });
 });

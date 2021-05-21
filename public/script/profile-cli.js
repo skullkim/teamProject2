@@ -5,7 +5,7 @@ $(document).ready(() => {
             `<div>
             <h2><a href=/letter/written?written=${id}>${title}</a></h2>
              <span>
-                 category: <a href="/letter/categories?category=${category}">${category}</a>    
+                 category: <a href="/letter/result?scope=category&target=${category}">${category}</a>    
              </span>
              <a href="/auth/edit-posting?written=${id}">수정</a>
              <a href="/auth/remove-posting?written=${id}">삭제</a>

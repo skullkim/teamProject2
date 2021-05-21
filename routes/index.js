@@ -57,6 +57,50 @@ router.get('/footer-img', async(req, res, next) => {
         console.error(err);
         next(err);
     }
-})
+});
+
+router.get('/main-img2', async(req, res, next) => {
+    try{
+        const s3 = new AWS.S3();
+        s3.getObject({
+            Bucket: `${process.env.AWS_S3_BUCKET}`,
+            Key: `${process.env.MAIN_IMG2}`,
+        }, (err, data) => {
+            if(err){
+                console.error(err);
+            }
+            else{
+                res.write(data.Body, 'binary');
+                res.end(null, 'binary');
+            }
+        });
+    }
+    catch(err){
+        console.error(err);
+        next(err);
+    }
+});
+
+router.get('/main-img3', async(req, res, next) => {
+    try{
+        const s3 = new AWS.S3();
+        s3.getObject({
+            Bucket: `${process.env.AWS_S3_BUCKET}`,
+            Key: `${process.env.MAIN_IMG3}`,
+        }, (err, data) => {
+            if(err){
+                console.error(err);
+            }
+            else{
+                res.write(data.Body, 'binary');
+                res.end(null, 'binary');
+            }
+        });
+    }
+    catch(err){
+        console.error(err);
+        next(err);
+    }
+});
 
 module.exports = router;

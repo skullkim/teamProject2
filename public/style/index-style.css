@@ -1,3 +1,29 @@
-h1{
-    color: green;
+#main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#main__div{
+    margin-top: 2vh;
+    /*width: 80vw;*/
+    /*display: flex;*/
+    /*justify-content: center;*/
+}
+
+#main__logo {
+    height: 32vh;
+    width: 20vw;
+}
+
+#main__img2 {
+    height: 32vh;
+    width: 30vw;
+}
+
+#main__img3 {
+    height: 38vh;
+    width: 45vw;
+    margin-right: 2vw;
 }

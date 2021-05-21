@@ -1,0 +1,36 @@
+#main {
+    display: flex;
+}
+
+.links{
+    text-decoration: none;
+    color: #566270;
+    font-size: 0.8em;
+}
+
+#main__category {
+    margin-left: 0.5vw;
+    padding-right: 0.5vw;
+    border-right: #566270 solid 1px;
+}
+
+ul{
+    list-style-type: none;
+}
+
+#main__letters{
+    margin-left: 5vw;
+    text-decoration: none;
+    color: #566270;
+}
+
+.postings{
+    margin-top: 1vh;
+    width: 80vw;
+    border-top: 0px;
+    border-bottom: 1px;
+    border-right: 0px;
+    border-left: 0px;
+    border-color: #566270;
+    border-style: solid;
+}

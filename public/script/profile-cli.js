@@ -12,6 +12,17 @@ $(document).ready(() => {
         </div>`);
         my_postings.append($written);
     }
+    const my_comments = $('#user-info__comments');
+    const displayComment = (id, comment) => {
+        const $div = $(`
+            <div>
+                <span>댓글: ${comment}</span>
+                <button id="comments__edit"><a href="/auth/edit-comment?id=${id}">수정</a></button>
+                <button id="comments__remove"><a href="/auth/remove-comment?id=${id}">삭제</a></button>
+            </div>
+        `);
+        my_comments.append($div);
+    }
     axios({
         method: 'get',
         url: '/auth/wrote-postings',
@@ -35,6 +46,11 @@ $(document).ready(() => {
     })
         .then((response) => {
             console.log(response);
+            response.data.forEach((data) => {
+                const {id, comment} = data;
+                console.log(id, comment);
+                displayComment(id, comment);
+            })
         })
         .catch((err) => {
             console.error(err);

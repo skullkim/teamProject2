@@ -410,6 +410,17 @@ router.get('/remove-posting', isLoggedIn, async(req, res, next) => {
         console.error(err);
         next(err);
     }
+});
+
+router.put('/comments-edit', isLoggedIn, async(req, res, next) => {
+    try{
+        const {new_comment} = req.body;
+        const {id} = req.query;
+    }
+    catch(err){
+        console.error(err);
+        next(err);
+    }
 })
 
 module.exports = router;

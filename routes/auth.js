@@ -294,7 +294,7 @@ router.get('/edit-posting', isLoggedIn, (req, res, next) => {
     }
 });
 
-router.post('/confirm-edit-posting', isLoggedIn, async(req, res, next) => {
+router.post('/confirm-edit-posting', isLoggedIn, uploadPostingImages.array('imgs'), async(req, res, next) => {
     try{
         const {post_id} = req.query;
         const {title, category, context, tags} = req.body;
@@ -325,7 +325,7 @@ router.post('/confirm-edit-posting', isLoggedIn, async(req, res, next) => {
                     })
                 );
             }
-            console.log(tags);
+            //console.log(tags);
              const result = await Promise.all(
                 tags.map((tag) => {
                     return Tag.create({
@@ -333,8 +333,45 @@ router.post('/confirm-edit-posting', isLoggedIn, async(req, res, next) => {
                     });
                 })
             );
-            console.log(result);
+
             await posting.addTags(result.map(r => r.id));
+            const images = req.files;
+            //console.log(req.files);
+            if(images){
+                const prev_imgs = await PostingImage.findAll({
+                    attributes: ['img_key'],
+                    where: {post_id},
+                });
+                console.log(prev_imgs);
+                const s3 = new AWS.S3();
+                prev_imgs.map((img) => {
+                    console.log(img.dataValues.img_key)
+                    s3.deleteObject({
+                        Bucket: `${process.env.AWS_S3_BUCKET}`,
+                        Key: `${img.dataValues.img_key}`,
+                    }, (err, data) => {
+                        err ? console.error(err) : console.log('delete img success');
+                    });
+                });
+                await PostingImage.destroy({
+                    where: {post_id},
+                });
+                await Promise.all(
+                    images.map((img) => {
+                        PostingImage.create({
+                            post_id: posting.id,
+                            img_key: img.key,
+                        })
+                    })
+                );
+                //console.log(prev_imgs);
+                // const s3 = new AWS.S3();
+                // s3.deleteObject({
+                //     Bucket: `${process.env.AWS_S3_BUCKET}`,
+                //     Key: `${}`
+                // })
+
+            }
             res.redirect('/auth/profile');
             //  res.send({success: 'success'});
         }

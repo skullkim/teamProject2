@@ -7,7 +7,7 @@
 <body>
     {% include "header.html" %}
     <main id="main">
-        <form method="post" name="edit-posting" id="main__post">
+        <form method="post" enctype="multipart/form-data" name="edit-posting" id="main__post">
 <!--        <article id="main__post">-->
             <input type="text" name="title" id="post__title">
             <select name="category" id="post__category">

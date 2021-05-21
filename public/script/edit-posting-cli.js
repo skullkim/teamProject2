@@ -7,6 +7,7 @@ $(document).ready(() => {
    function displayPrevContext(context, all_tags){
         const{author, title, main_posting, main_category} = context.main_data;
         prev_title = title;
+        $('#main__post').attr('action', `/auth/confirm-edit-posting?post_id=${written}`);
        $('#post__title').val(`${title}`)//제목
         $('#post__main-context').val(`${main_posting}`);//글 내용
        $('#post__category').val(`${main_category}`).prop('selected', true);//메인 카테고리
@@ -16,7 +17,7 @@ $(document).ready(() => {
        all_tags[`${main_category}`].forEach((tag) => {
            const id = `tag__${ids++}`;
            const new_tag = $(`
-                <input type="checkbox" id="${id}" value="${tag}" name="tag-box"/>
+                <input type="checkbox" id="${id}" value="${tag}" name="tags"/>
                 <label for="${id}">${tag}</label>
             `);
            context.tags.forEach((selected) => {
@@ -107,44 +108,94 @@ $(document).ready(() => {
         }
         return true;
     }
-    const submit_btn = $('#post__submit');
-    submit_btn.click(() => {
-        const title = $('#post__title').val();
-        const category = getCategory();
-        const context = $('#post__main-context').val();
-        const tags = new Array();
-        $('input:checkbox[name="tag-box"]').each(function(){
-            if(this.checked === true){
-                tags.push(this.value);
-            }
-        });
-        if(!makeErrorMessage(title, category, context)){
-            return;
-        }
-        axios({
-            method: 'put',
-            url: '/auth/confirm-edit-posting',
-            contentType: 'application/json',
-            cacheControl: 'no-cache',
-            data:{
-                title,
-                category,
-                context,
-                tags,
-                prev_title,
-            }
-        })
-            .then((response) => {
-                const{err} = response.data;
-                if(err){
-                    message.text(err);
-                }
-                else{
-                    location.href="/";
-                }
-            })
-            .catch((err) => {
-                console.error(err);
-            })
-    });
+    // $('form[name="edit-posting"]')
+    // const form = document.forms.namedItem('edit-posting');
+    // form.submit(() => {
+    //     console.log(111111);
+    //     //const form =$('form[name="edit-posting"]')[0];
+    //     const title = $('#post__title').val();
+    //     const category = getCategory();
+    //     const context = $('#post__main-context').val();
+    //     const images = $('#imgs__select')[0].files;
+    //     const f = new FormData(form);
+    //     //form.append('imgs', images);
+    //     console.log(f);
+    //     const tags = new Array();
+        // $('input:checkbox[name="tag-box"]').each(function(){
+        //     if(this.checked === true){
+        //         tags.push(this.value);
+        //     }
+        // });
+        // if(!makeErrorMessage(title, category, context)){
+        //     return;
+        // }
+        // axios({
+        //     method: 'put',
+        //     url: '/auth/confirm-edit-posting',
+        //     contentType: 'application/json',
+        //     cacheControl: 'no-cache',
+        //     data:{
+        //         title,
+        //         category,
+        //         context,
+        //         tags,
+        //         prev_title,
+        //     }
+        // })
+        //     .then((response) => {
+        //         const{err} = response.data;
+        //         if(err){
+        //             message.text(err);
+        //         }
+        //         else{
+        //             location.href="/";
+        //         }
+        //     })
+        //     .catch((err) => {
+        //         console.error(err);
+        //     })
+    // })
+    // const submit_btn = $('#post__submit');
+    // submit_btn.click(() => {
+    //     const title = $('#post__title').val();
+    //     const category = getCategory();
+    //     const context = $('#post__main-context').val();
+    //     const images = $('#imgs__select')[0];
+    //     const form = new FormData(images);
+    //     console.log(form);
+    //     const tags = new Array();
+        // $('input:checkbox[name="tag-box"]').each(function(){
+        //     if(this.checked === true){
+        //         tags.push(this.value);
+        //     }
+        // });
+        // if(!makeErrorMessage(title, category, context)){
+        //     return;
+        // }
+        // axios({
+        //     method: 'put',
+        //     url: '/auth/confirm-edit-posting',
+        //     contentType: 'application/json',
+        //     cacheControl: 'no-cache',
+        //     data:{
+        //         title,
+        //         category,
+        //         context,
+        //         tags,
+        //         prev_title,
+        //     }
+        // })
+        //     .then((response) => {
+        //         const{err} = response.data;
+        //         if(err){
+        //             message.text(err);
+        //         }
+        //         else{
+        //             location.href="/";
+        //         }
+        //     })
+        //     .catch((err) => {
+        //         console.error(err);
+        //     })
+    // });
 });

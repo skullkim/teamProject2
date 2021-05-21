@@ -294,9 +294,10 @@ router.get('/edit-posting', isLoggedIn, (req, res, next) => {
     }
 });
 
-router.put('/confirm-edit-posting', isLoggedIn, async(req, res, next) => {
+router.post('/confirm-edit-posting', isLoggedIn, async(req, res, next) => {
     try{
-        const {title, category, context, tags, prev_title} = req.body;
+        const {post_id} = req.query;
+        const {title, category, context, tags} = req.body;
         const {id} = req.user;
         const ex_posting =  await Posting.findOne({
             where: {title}
@@ -310,17 +311,21 @@ router.put('/confirm-edit-posting', isLoggedIn, async(req, res, next) => {
                 main_posting: `${context}`,
                 main_category: `${category}`,
             },{
-                where: {title: prev_title},
+                where: {id: post_id},
             });
             const posting = await Posting.findOne({
                 where: {title}
             });
             const prev_tags = await posting.getTags();
-            await Promise.all(
-                prev_tags.map((tag) => {
-                    posting.removeTag(tag.id);
-                })
-            );
+            //console.log(prev_tags);
+            if(prev_tags){
+                await Promise.all(
+                    prev_tags.map((tag) => {
+                        posting.removeTag(tag.id);
+                    })
+                );
+            }
+            console.log(tags);
              const result = await Promise.all(
                 tags.map((tag) => {
                     return Tag.create({
@@ -330,8 +335,8 @@ router.put('/confirm-edit-posting', isLoggedIn, async(req, res, next) => {
             );
             console.log(result);
             await posting.addTags(result.map(r => r.id));
-
-             res.send({success: 'success'});
+            res.redirect('/auth/profile');
+            //  res.send({success: 'success'});
         }
     }
     catch(err){

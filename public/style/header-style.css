@@ -1,0 +1,53 @@
+#head {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#head>* {
+    margin: 0 1vw;
+}
+
+#head__list{
+    font-size: 1em;
+}
+
+.alink>a {
+    display: inline-block;
+    margin-right: 0.8vw;
+}
+
+.head__links {
+    text-decoration: none;
+    font-size: 1.5em;
+    color: #566270;
+}
+
+.fa-list {
+    margin-left: 0.5vw;
+    font-size: 2em;
+}
+
+#head__main-logo {
+    height: 5vh;
+    width: 4vw;
+}
+
+#head__search-list {
+    height: 3.5vh;
+    width: 7vw;
+}
+
+#head__search-list>* {
+    font-size: 3em;
+}
+
+#head__search {
+    height: 3vh;
+    width: 20vw;
+    margin-right: 0.5vw;
+}
+
+.fa-search {
+    font-size: 1.6em;
+}

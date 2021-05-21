@@ -1,0 +1,15 @@
+#footer {
+    margin-top: 1vh;
+    padding-bottom: 2vh;
+    display: flex;
+    justify-content: center;
+}
+
+#footer__logo {
+    height: 8vh;
+    width: 10vw;
+}
+
+.footer-info {
+    color: #566270;
+}

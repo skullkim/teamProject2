@@ -19,3 +19,22 @@
     border-style: solid;
     padding-bottom: 1vh;
 }
+
+#search-result__book {
+    height: 20vh;
+    width: 80vw;
+    border-bottom: #566270 solid 1px;
+}
+
+#book__intro {
+    display: flex;
+}
+
+#intro__book-img {
+    height: 15vh;
+    width: 10vw;
+}
+
+#intro__text-info {
+    margin-left: 1vw;
+}

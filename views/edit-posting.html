@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/common-style.css">
+    <link rel="stylesheet" href="/style/edit-posting-style.css">
     <title>Title</title>
 </head>
 <body>
@@ -9,8 +12,8 @@
     <main id="main">
         <form method="post" enctype="multipart/form-data" name="edit-posting" id="main__post">
 <!--        <article id="main__post">-->
-            <input type="text" name="title" id="post__title">
-            <select name="category" id="post__category">
+            <input type="text" name="title" class="edit-posting-inputs other-infos" id="post__title">
+            <select name="category" class="edit-posting-inputs other-infos" id="post__category">
                 <option>=== 글 카테고리 ===</option>
                 <option value="알고리즘">알고리즘</option>
                 <option value="스터디">스터디</option>
@@ -19,13 +22,13 @@
                 <option value="코딩질문">코딩질문</option>
                 <option value="자유게시판">자유게시판</option>
             </select>
-            <div id="post__tag"></div>
-            <textarea name="context" id="post__main-context" cols="30" rows="10"></textarea>
-            <div id="post__imgs">
+            <div class="edit-posting-inputs" id="post__tag"></div>
+            <textarea name="context" id="post__main-context" class="edit-posting-inputs" cols="30" rows="10"></textarea>
+            <div class="edit-posting-inputs" id="post__imgs">
                 <label for="imgs__select">이미지 추가</label>
                 <input type="file" multiple value="이미지 선택" name="imgs" id="imgs__select">
             </div>
-            <input type="submit" id="post__submit">
+            <input type="submit" class="edit-posting-inputs other-infos" id="post__submit">
             <span id="message">{{message}}</span>
 <!--        </article>-->
         </form>

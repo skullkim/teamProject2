@@ -3,20 +3,20 @@ $(document).ready(() => {
     const displayWritten = (id, category, title) => {
         const $written = $(
             `<div>
-            <h2><a href=/letter/written?written=${id}>${title}</a></h2>
+            <h2><a class="links" href=/letter/written?written=${id}>${title}</a></h2>
              <span>
-                 category: <a href="/letter/result?scope=category&target=${category}">${category}</a>    
+                 category: <a class="links" href="/letter/result?scope=category&target=${category}">${category}</a>    
              </span>
-             <a href="/auth/edit-posting?written=${id}">수정</a>
-             <a href="/auth/remove-posting?written=${id}">삭제</a>
+             <a class="links" href="/auth/edit-posting?written=${id}">수정</a>
+             <a class="links" href="/auth/remove-posting?written=${id}">삭제</a>
         </div>`);
         my_postings.append($written);
     }
     const my_comments = $('#user-info__comments');
     const displayComment = (id, comment) => {
         const $div = $(`
-            <div>
-                <span>댓글: ${comment}</span>
+            <div class="comment">
+                <p>댓글: ${comment}</p>
 <!--                <button id="comments__edit"><a href="/auth/edit-comment?id=${id}">수정</a></button>-->
                 <button class="comments__edit">수정</input>
                 <button class="comments__remove">삭제</button>

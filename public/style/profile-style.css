@@ -1,0 +1,42 @@
+#main__user-info {
+    margin-top: 2vh;
+    display: flex;
+    margin-left: 1vw;
+    justify-content: center;
+}
+
+#user-info__my-info {
+    display: flex;
+}
+
+#my-info__edit {
+    margin-left: 1vw;
+    display: flex;
+    flex-direction: column;
+}
+
+#user-info__name {
+    font-size: 1.5em;
+}
+
+.profile-link {
+    font-size: 1em;
+}
+
+#user-info__postings, #user-info__comments {
+    margin-left: 3vw;
+    border-left: #566270 solid 1px;
+    padding-left: 1vw;
+}
+
+.comment {
+    display: flex;
+    align-items: center;
+    color: #566270;
+}
+
+.comments__edit, .comments__remove {
+    height: 2vh;
+    margin-left: 0.5vw;
+    color: #566270;
+}

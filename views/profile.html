@@ -4,23 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style/common-style.css">
+    <link rel="stylesheet" href="/style/profile-style.css">
     <title>{{user_name}}</title>
 </head>
 <body>
     {% include "header.html" %}
     <main id="main">
         <article id="main__user-info">
-            <img src="/auth/profile-img" alt="" id="user-info__img" height="100px" width="100px">
-            <span id="user-info__name">{{user_name}}</span>
-            <a href="/auth/edit-profile" id="user-info__edit-profile">Edit profile</a>
-            {% if local_login %}
-            <a href="/auth/edit-password" id="user-info__change-password">change password</a>
-            {% endif %}
+            <section id="user-info__my-info">
+                <img src="/auth/profile-img" alt="" id="my-info__img" height="100px" width="100px">
+                <div id="my-info__edit">
+                    <p id="user-info__name">{{user_name}}</p>
+                    <a href="/auth/edit-profile" class="links profile-link" id="user-info__edit-profile">Edit profile</a>
+                    {% if local_login %}
+                    <a href="/auth/edit-password" class="links profile-link" id="user-info__change-password">change password</a>
+                    {% endif %}
+                </div>
+            </section>
             <section id="user-info__postings">
-                <h3>내 글</h3>
+                <h3 class="headlines">내 글</h3>
             </section>
             <section id="user-info__comments">
-                <h3>나의 댓글</h3>
+                <h3 class="headlines">나의 댓글</h3>
             </section>
         </article>
     </main>

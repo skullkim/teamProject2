@@ -30,7 +30,7 @@ $(document).ready(() => {
                 .then((response) => {
                     const {err} = response.data;
                     if(err) {
-                        message.text(err);
+                        err_message.text(err);
                     }
                     else{
                         location.href='../'

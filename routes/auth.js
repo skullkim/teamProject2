@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.get('/posting', isLoggedIn, (req, res, next) => {
     try{
-        res.render('new-posting', {is_logged_in: true});
+        res.render('new-posting', {is_logged_in: true, message: req.flash('message')});
     }
     catch(err){
         console.error(err);
@@ -196,7 +196,9 @@ router.post('/new-posting', isLoggedIn, uploadPostingImages.array('imgs'), async
             where: {title},
         });
         if(ex_posting){
-            res.send({err: 'same title exist'});
+            req.flash('message', 'same title exist');
+            res.redirect('/auth/posting');
+            //res.send({err: 'same title exist'});
         }
         else{
             const posting = await Posting.create({

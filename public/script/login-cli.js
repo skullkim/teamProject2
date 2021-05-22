@@ -6,7 +6,7 @@ $(document).ready(function (){
         return !reg_email.test(email) ? false : true;
     }
     submit_btn.click( () => {
-        const email = $('#local__name').val();
+        const email = $('#local__email').val();
         const password = $('#local__password').val();
         const message = $('#login__err-message');
         console.log(email, password);

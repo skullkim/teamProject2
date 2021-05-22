@@ -29,12 +29,16 @@
     border-bottom: #566270 solid 1px;
 }
 
+#book__title {
+    font-size: 1.5em;
+}
+
 #book__intro {
     display: flex;
 }
 
 #intro__book-img {
-    height: 15vh;
+    height: 13vh;
     width: 10vw;
 }
 

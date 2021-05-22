@@ -15,7 +15,7 @@ $(document).ready(() => {
             const{authors, thumbnail, title, contents, url} = book;
             const book_intro = $(`
                     <div id="search-result__book">
-                        <p><a class="links" href="${url}">제목:${title}</a></p>
+                        <p id="book__title"><a class="links" href="${url}">제목:${title}</a></p>
                         <div id="book__intro">
                             <img id="intro__book-img" src="${thumbnail}" alt="book thumbnail">
                             <div id="intro__text-info">

@@ -1,0 +1,45 @@
+#main {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    margin-top: 2vh;
+    /*align-items: center;*/
+}
+
+#new-post {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 50vh;
+}
+
+#new-post > *{
+    margin-top: 1vh;
+}
+
+#post__title {
+    height: 5vh;
+    width: 50vw;
+    font-size: 1em;
+}
+
+#post__category {
+    height: 4vh;
+}
+
+#post__main-context {
+    height: 50vh;
+    overflow: scroll;
+}
+
+#new-post__submit {
+    height: 5vh;
+    font-size: 1em;
+}
+
+#message {
+    text-align: center;
+    font-size: 1.5em;
+    color: indianred;
+}

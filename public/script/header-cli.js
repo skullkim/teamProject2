@@ -1,6 +1,6 @@
 $(document).ready(() => {
     const getSearchScope = () => {
-        const search_scope = $('#search-list')[0];
+        const search_scope = $('#head__search-list')[0];
         return search_scope.options[search_scope.selectedIndex].value;
     }
     const search_btn = $('#head__search-logo');

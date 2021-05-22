@@ -2,22 +2,6 @@
     display: flex;
 }
 
-.links {
-    text-decoration: none;
-    color: #566270;
-    font-size: 0.8em;
-}
-
-#main__category {
-    margin-left: 0.5vw;
-    padding-right: 0.5vw;
-    border-right: #566270 solid 1px;
-}
-
-ul{
-    list-style-type: none;
-}
-
 #main__search-result {
     margin-left: 5vw;
     text-decoration: none;

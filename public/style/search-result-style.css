@@ -6,6 +6,9 @@
     margin-left: 5vw;
     text-decoration: none;
     color: #566270;
+    width: 90vw;
+    height: 99vh;
+    overflow: scroll;
 }
 
 .postings {

@@ -5,6 +5,7 @@
 }
 
 #main__category {
+    width: 10vw;
     margin-left: 0.5vw;
     padding-right: 0.5vw;
     border-right: #566270 solid 1px;

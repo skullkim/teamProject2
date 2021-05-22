@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style/common-style.css">
+    <link rel="stylesheet" href="/style/signup-style.css">
     <title>login</title>
 </head>
 <body>
@@ -11,27 +12,32 @@
     <main id="main">
         <article id="main__signup">
             <section id="signup__local">
-                <input type="text" placeholder="name" name="name" id="local__name">
-                <input type="text" placeholder="email" name="email" id="local__email">
-                <input type="text" placeholder="age" name="age" id="local__age">
-                <input type="password" placeholder="password" name="passwd1" id="local__passwd1">
-                <input type="password" placeholder="Verify password" name="passwd2" id="local__passwd2">
-                <input type="submit" value="Join Now!" id="local__submit">
+                <h2 id="local__headline">Learning code 회원가입</h2>
+                <input type="text" placeholder="name" name="name" class="local-inputs" id="local__name">
+                <input type="text" placeholder="email" name="email" class="local-inputs" id="local__email">
+                <input type="text" placeholder="age" name="age" class="local-inputs" id="local__age">
+                <input type="password" placeholder="password" name="passwd1" class="local-inputs" id="local__passwd1">
+                <input type="password" placeholder="Verify password" name="passwd2" class="local-inputs" id="local__passwd2">
+                <input type="submit" value="Join Now!" class="local-inputs" id="local__submit">
             </section>
-            <section id="signup__kakao">
-                <a href="/login/kakao" id="kakao__signup-btn">
-                    <i class="fas fa-comment"></i>
-                    Signup with Kakao
-                </a>
-            </section>
-            <sectino id="login__github">
-                <a href="/login/github" id="git__login-btn">
-                    <i class="fab fa-github"></i>
-                    Signup with Github
-                </a>
-            </sectino>
+            <article id="signup__api">
+                <h2 id="api__headline">카카오 또는 깃허브로 회원가입</h2>
+                <section id="signup__kakao">
+                    <a href="/login/kakao" id="kakao__signup-btn">
+                        <i class="fas fa-comment"></i>
+                        Signup with Kakao
+                    </a>
+                </section>
+                <section id="signup__github">
+                    <a href="/login/github" id="git__signup-btn">
+                        <i class="fab fa-github"></i>
+                        Signup with Github
+                    </a>
+                </section>
+                <p id="message"></p>
+            </article>
         </article>
-        <span id="message"></span>
+
     </main>
     {% include "footer.html" %}
     {% include "common-script.html" %}

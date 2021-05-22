@@ -1,0 +1,78 @@
+#main__signup {
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#signup__local {
+    display: flex;
+    flex-direction: column;
+}
+
+#local__headline {
+    color: #566270;
+    text-align: center;
+}
+
+.local-inputs {
+    height: 4vh;
+    width: 25vw;
+    margin-top: 1vh;
+    font-size: 1em;
+}
+
+#local__submit {
+    color: #566270;
+    width: 25.5vw;
+}
+
+#signup__api {
+    height: 39.5vh;
+    margin-left: 2vw;
+}
+
+#api__headline {
+    margin-bottom: 3vh;
+    color: #566270;
+    text-align: center;
+}
+
+#signup__kakao, #signup__github {
+    height: 4.5vh;
+    width: 17vw;
+    border-radius: 10px 10px 10px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1vh;
+}
+
+#signup__kakao {
+    background-color: rgb(252, 206, 0);
+}
+
+#kakao__signup-btn, #git__signup-btn {
+    text-decoration: none;
+    font-size: 1.4em;
+    color: #566270;
+    text-align: center;
+}
+
+.fa-comment {
+    color: rgb(59, 30, 30);
+}
+
+#signup__github {
+    background-color: rgb(14, 17, 23);
+}
+
+.fa-github {
+    color: white;
+}
+
+#message {
+    margin-top: 18vh;
+    font-size: 1.5em;
+    color: indianred;
+}

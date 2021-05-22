@@ -151,8 +151,8 @@ router.get('/search-title', async(req, res, next) => {
     }
 });
 
-const findBook = async () => {
-    const title = '프로그래밍';
+const findBook = async (target) => {
+    const title =  target || '프로그래밍';
     const result = await axios({
         method: 'GET',
         url: `https://dapi.kakao.com/v3/search/book?target=title`,
@@ -185,7 +185,7 @@ router.get('/search-category', async(req, res, next) => {
             }
         }
         else{
-            return res.send(await findBook());
+            return res.send(await findBook(null));
         }
 
         res.send(null);
@@ -195,6 +195,17 @@ router.get('/search-category', async(req, res, next) => {
         next(err);
     }
 });
+
+router.get('/search-book', async(req, res, next) => {
+    try{
+        const {target} = req.query;
+        return res.send(await findBook(target));
+    }
+    catch(err){
+        console.error(err);
+        next(err);
+    }
+})
 
 router.get('/letter-comments', async(req, res, next) => {
     try{

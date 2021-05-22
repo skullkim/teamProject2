@@ -61,7 +61,7 @@ $(document).ready(() => {
                 main_section.append('<h2>검색결과 없음</h2>');
                 return;
             }
-            if(target !== '도서 추천'){
+            if(target !== '도서 추천' && scope != 'book'){
                 res.data.forEach((written) => {
                     console.log(written);
                     const {main_category, id, title} = written;

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style/common-style.css">
+    <link rel="stylesheet" href="/style/login-style.css">
     <title>login</title>
 </head>
 <body>
@@ -11,24 +12,30 @@
     <main id="main">
         <article id="main__login">
             <section id="login__local">
-                <input type="text" placeholder="email" name="email" id="local__name">
+                <h2 id="local__headline">Learning code 로그인</h2>
+                <input type="text" placeholder="email" name="email" id="local__email">
                 <input type="password" placeholder="password" name="password" id="local__password">
-                <input type="submit" value="login" id="login__submit">
-                <button id="login__find-passwd"><a href="/login/new-password">Find password</a></button>
+                <div id="local__btn">
+                    <input type="submit" value="login" id="login__submit">
+                    <button id="login__find-passwd"><a href="/login/new-password">Find password</a></button>
+                </div>
             </section>
-            <section id="login__kakao">
-                <a href="/login/kakao" id="kakao__login-btn">
-                    <i class="fas fa-comment"></i>
-                    Login with Kakao
-                </a>
-            </section>
-            <sectino id="login__github">
-                <a href="/login/github" id="git__login-btn">
-                    <i class="fab fa-github"></i>
-                    Login with Github
-                </a>
-            </sectino>
-            <span id="login__err-message"></span>
+            <article id="login__api">
+                <h2 id="api__headline">카카오 또는 깃허브로 로그인</h2>
+                <section id="login__kakao">
+                    <a href="/login/kakao" id="kakao__login-btn">
+                        <i class="fas fa-comment"></i>
+                        Login with Kakao
+                    </a>
+                </section>
+                <section id="login__github">
+                    <a href="/login/github" id="git__login-btn">
+                        <i class="fab fa-github"></i>
+                        Login with Github
+                    </a>
+                </section>
+                <p id="login__err-message"></p>
+            </article>
         </article>
     </main>
     {% include "footer.html" %}

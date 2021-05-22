@@ -1,0 +1,92 @@
+#main__login {
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#login__local, #login__kakao, #login__github {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#local__headline {
+    color: #464e58;
+}
+
+#local__email, #local__password {
+    height: 4vh;
+    width: 25vw;
+    margin-top: 1vh;
+    font-size: 1em;
+}
+
+#local__btn {
+    margin-top: 1vh;
+    display: flex;
+}
+
+#login__submit {
+    height: 4vh;
+    width: 12vw;
+    font-size: 1.5em;
+    margin-right: 0.5vw;
+    color: #566270;
+}
+
+#login__find-passwd {
+    height: 4vh;
+    width: 13vw;
+}
+
+#login__find-passwd > a {
+    color: #566270;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+#login__api {
+    height: 23vh;
+    margin-left: 2vw;
+}
+
+#api__headline {
+    color: #464e58;
+    margin-bottom: 3vh;
+}
+
+#login__kakao {
+    background-color: rgb(252, 206, 0);
+    height: 4.5vh;
+    border-radius: 10px 10px 10px 10px;
+}
+
+#kakao__login-btn, #git__login-btn{
+    text-decoration: none;
+    font-size: 1.5em;
+    color: #566270;
+}
+
+.fa-comment {
+    color: rgb(59, 30, 30);
+}
+
+#login__github {
+    margin-top: 1vh;
+    background-color: rgb(14, 17, 23);
+    height: 4.5vh;
+    border-radius: 10px 10px 10px 10px;
+    /*margin-bottom: 2vh;*/
+}
+
+.fa-github {
+    color: white;
+}
+
+#login__err-message {
+    font-size: 1.5em;
+    color: indianred;
+    margin-left: 1vw;
+}

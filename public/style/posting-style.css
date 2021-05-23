@@ -1,0 +1,38 @@
+#main {
+    width: 100%;
+    /*height: 80vh;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+p, span {
+    color: #566270;
+}
+
+.posting-infos {
+    width: 80vw;
+}
+
+#main__comment-input {
+    display: flex;
+}
+
+
+#comment-input__comment {
+    width: 40vw;
+    overflow: scroll;
+}
+
+#comment-input__submit {
+    width: 4vw;
+    height: 5vh;
+    margin-left: 1vw;
+}
+
+#comment {
+    border: 1px solid #566270;
+    padding: 1vh 1vw;
+    height: 3vh;
+}

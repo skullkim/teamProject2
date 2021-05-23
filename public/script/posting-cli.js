@@ -7,9 +7,10 @@ $(document).ready(() => {
         const {author, main_category, title, main_posting} = data.main_data;
         const {tags, posting_id, images} = data;
         const $div =  $(
-            `<div id="main__context">
-                <h3 id="context__id">${title}</h3>
+            `<div class="posting-infos" id="main__context">
+                <h3 id="context__id">제목: ${title}</h3>
                 <h4 id="context__author">글쓴이: ${author}</h4>
+                <hr>
                 <p id="context__written">${main_posting}</p>
                 <div id="context__category">
                     <span class="categories">#${main_category}</span>
@@ -17,7 +18,7 @@ $(document).ready(() => {
             </div>`);
         main.prepend($div);
         const context_category = $('#context__category');
-        const img_div = (`<div id="context__images"></div>`);
+        const img_div = (`<div class="posting-infos" id="context__images"></div>`);
         context_category.before(img_div);
         const image = $('#context__images');
         images.forEach((img) => {
@@ -31,15 +32,15 @@ $(document).ready(() => {
                 `<span class="categories">#${tag}</span>
             `);
         });
-
+        category.append(`<hr>`);
     }
     //댓글 정보를 페이지에 로딩
     const comment_area = $('#main__comments');
     const makeComment = (name, comment) => {
         const div = $(`
-            <div class="comments">
+            <div class="posting-infos comments">
                 <p>${name}</p>
-                <p>${comment}</p>
+                <p id="comment">${comment}</p>
             </div>
         `);
         comment_area.append(div);

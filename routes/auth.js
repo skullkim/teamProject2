@@ -317,13 +317,12 @@ router.post('/confirm-edit-posting', isLoggedIn, uploadPostingImages.array('imgs
         const {post_id} = req.query;
         const {title, category, context, tags} = req.body;
         const {id} = req.user;
+        const post_id_num = post_id * 1;
         const ex_posting =  await Posting.findOne({
             where: {title}
         });
-        //console.log(ex_posting);
-        if(ex_posting){
+        if(ex_posting && ex_posting.id !== post_id_num){
             //res.send({err: 'same title exist'});
-            console.log(1111);
             req.flash('message', 'same title exist');
             return res.redirect(`/auth/edit-posting?written=${post_id}`);
         }
@@ -333,7 +332,7 @@ router.post('/confirm-edit-posting', isLoggedIn, uploadPostingImages.array('imgs
                 main_posting: `${context}`,
                 main_category: `${category}`,
             },{
-                where: {id: post_id},
+                where: {id: post_id_num},
             });
             const posting = await Posting.findOne({
                 where: {title}
@@ -358,7 +357,7 @@ router.post('/confirm-edit-posting', isLoggedIn, uploadPostingImages.array('imgs
             if(images){
                 const prev_imgs = await PostingImage.findAll({
                     attributes: ['img_key'],
-                    where: {post_id},
+                    where: {post_id: post_id_num},
                 });
                 console.log(prev_imgs);
                 const s3 = new AWS.S3();
@@ -372,7 +371,7 @@ router.post('/confirm-edit-posting', isLoggedIn, uploadPostingImages.array('imgs
                     });
                 });
                 await PostingImage.destroy({
-                    where: {post_id},
+                    where: {post_id: post_id_num},
                 });
                 await Promise.all(
                     images.map((img) => {

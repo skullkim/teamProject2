@@ -10,6 +10,8 @@ const {sequelize} = require('./models');
 const nunjucks = require('nunjucks');
 const flash = require('express-flash');
 const favicon = require('serve-favicon');
+const helmet = require('helmet');
+const hpp = require('hpp');
 
 dotenv.config();
 const app = express();
@@ -24,7 +26,16 @@ sequelize.sync({force:false})
     .catch((err) => console.error(err));
 app.set('port', process.env.PORT || 8080);
 
-app.use(morgan('dev'));
+if(process.env.NODE_ENV === 'production'){
+    app.enable('trust proxy');
+    app.use(morgan('combined'));
+    app.use(helmet({contentSecurityPolicy: false}));
+    app.use(hpp());
+}
+else{
+    app.use(morgan('dev'));
+}
+
 app.use(favicon(path.join(__dirname, 'public', 'main-logo.ico')))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());

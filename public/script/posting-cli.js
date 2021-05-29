@@ -11,12 +11,40 @@ $(document).ready(() => {
                 <h3 id="context__id">제목: ${title}</h3>
                 <h4 id="context__author">글쓴이: ${author}</h4>
                 <hr>
-                <p id="context__written">${main_posting}</p>
+                <textarea id="context__written" readonly>${main_posting}</textarea>
                 <div id="context__category">
                     <span class="categories">#${main_category}</span>
                 </div>
             </div>`);
+
         main.prepend($div);
+        // $('#main__context').({
+        //     minDate: 0,
+        //     altField: '##context__written',
+        //     onSelect: function() {
+        //         const $area = $('#context__written');
+        //         $area.css('height', 'auto');
+        //         $area.css('height', $area[0].scrollHeight);
+        //     }
+        // })
+        const written_area = $('#context__written');
+        written_area.css('height', 'auto');
+        written_area.css('height', written_area[0].scrollHeight);
+        // written_area.css('heigth', `${written_area.scrollHeight + 10}px`);
+        // console.log(written_area.offsetHeight);
+        // written_area.load(function() {
+        //     console.log(this === written_area);
+        //     $(this).css('height', 'auto');
+        //     $(this).height(this.scrollHeight);
+        //     // console.log(this.scrollHeight);
+        // })
+        // written_area.
+        // written_area.ready(function() {
+        //     console.log($(this) === $('#context__written'));
+        //     $(this).css('height', 'auto');
+        //     $(this).height(this.scrollHeight);
+        //     // console.log(this.scrollHeight);
+        // })
         const context_category = $('#context__category');
         const img_div = (`<div class="posting-infos" id="context__images"></div>`);
         context_category.before(img_div);
@@ -97,5 +125,13 @@ $(document).ready(() => {
                console.error(err);
            })
     });
-
+    // const written_area = $('#context__written');
+    // written_area.css('height', 'autho');
+    // written_area.height(written_area.scrollHeight);
+    // written_area.ready(function() {
+    //     console.log($(this));
+    //     $(this).css('height', 'auto');
+    //     $(this).height(this.scrollHeight);
+    //     // console.log(this.scrollHeight);
+    // })
 })

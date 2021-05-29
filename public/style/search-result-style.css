@@ -24,7 +24,8 @@
 }
 
 #search-result__book {
-    height: 20vh;
+    margin-top: 4em;
+    height: 25vh;
     width: 80vw;
     border-bottom: #566270 solid 1px;
 }

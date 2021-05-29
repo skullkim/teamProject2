@@ -217,26 +217,25 @@ router.post('/new-posting', isLoggedIn, uploadPostingImages.array('imgs'), async
                     })
                 })
             );
-            // req.files.forEach((img) => {
-            //     const {key} = img;
-            //     await PostingImage.create({
-            //         post_id
-            //     })
-            // });
-
             if(tags){
-                const result = await Promise.all(
-                    tags.map((tag) => {
-                        return Tag.create({
-                            tag
-                        });
-                    })
-                );
-                //console.log(result);
-                await posting.addTags(result.map(r => r.id));
+                if(typeof tags === "object"){
+                    const result = await Promise.all(
+                        tags.map((tag) => {
+                            return Tag.create({
+                                tag
+                            });
+                        })
+                    );
+                    await posting.addTags(result.map(r => r.id));
+                }
+                else{
+                    const result = await Tag.create({
+                        tag: tags,
+                    });
+                    await posting.addTags(result);
+                }
             }
             res.redirect('/');
-            //res.send({success: 'success'});
         }
     }
     catch(err){

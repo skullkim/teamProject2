@@ -21,8 +21,9 @@
 6. passport - passport strategy
 - - -
 ## Used skills
-  Express, Nunjucks,Passport, Kakao API, Github API, Jquery, <br>
-  AWS EC2, AWS RDS, AWS S3, Multer
+  Backend: Express, Passport, AWS EC2, AWS RDS, AWS S3, Multer<br>
+  Frontend: Nunjucks, Jquery<br>
+  Database: Sequelize, mysql
 - - -
 ## License
   This project is licensed under the terms of the MIT license.

@@ -57,7 +57,6 @@ router.get('/new-password', isNotLoggedIn, (req, res, next) => {
 
 router.put('/confirm-new-password', isNotLoggedIn, async (req, res, next) => {
     try{
-        //console.log(req.body);
         const {email, password} = req.body;
         const ex_user = await User.findOne({
             where: {email},

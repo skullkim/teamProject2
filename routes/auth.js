@@ -198,7 +198,6 @@ router.post('/new-posting', isLoggedIn, uploadPostingImages.array('imgs'), async
         if(ex_posting){
             req.flash('message', 'same title exist');
             res.redirect('/auth/posting');
-            //res.send({err: 'same title exist'});
         }
         else{
             const posting = await Posting.create({
@@ -208,7 +207,6 @@ router.post('/new-posting', isLoggedIn, uploadPostingImages.array('imgs'), async
                 main_category: `${category}`,
             });
             const images = req.files;
-            //images.forEach((img) => console.log(e));
             await Promise.all(
                 images.map((img) => {
                     PostingImage.create({
@@ -321,7 +319,6 @@ router.post('/confirm-edit-posting', isLoggedIn, uploadPostingImages.array('imgs
             where: {title}
         });
         if(ex_posting && ex_posting.id !== post_id_num){
-            //res.send({err: 'same title exist'});
             req.flash('message', 'same title exist');
             return res.redirect(`/auth/edit-posting?written=${post_id}`);
         }

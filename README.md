@@ -1,11 +1,30 @@
-## 2021 1학기 팀프로젝트2 5팀
+## 2021 spring semester Team project2, team 5
 - - -
-## 디렉토리 구조
-1. public - client-side js files,  css files<br>  
-   1.1 script - client-side js files<br>  
+## Project name
+  Learning Code
+- - -
+## Description
+  A website to share programming knowledge
+- - -
+## Running this website
+  I ignored node_moules, .env, which involves DB, AWS S3 informations, API(kakao, github) client key and secret.<br>  
+  Therefore, you have to install modules and create .env file first.
+- - -
+## Directory structure
+1. public - client-side js files,  css files<br>
+   1.1 script - client-side js files<br>
    1.2 sctyle - css files<br>
 2. routes - router files
 3. views - HTML and nunjucks files
-4. config - sequelize와 mysql 연동을 위한 세
-5. models - mysql과 매핑될 객체의 정의
-6. passport - 로그인을 위한 passport strategy
+4. config - Setting for linking sequelize and mysql
+5. models - sequelize table
+6. passport - passport strategy
+- - -
+## Used skills
+  Express, Nunjucks,Passport, Kakao API, Github API, Jquery, <br>
+  AWS EC2, AWS RDS, AWS S3, Multer
+- - -
+## License
+  This project is licensed under the terms of the MIT license.
+- - -
+

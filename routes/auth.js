@@ -224,15 +224,17 @@ router.post('/new-posting', isLoggedIn, uploadPostingImages.array('imgs'), async
             //     })
             // });
 
-            const result = await Promise.all(
-                tags.map((tag) => {
-                    return Tag.create({
-                        tag
-                    });
-                })
-            );
-            //console.log(result);
-            await posting.addTags(result.map(r => r.id));
+            if(tags){
+                const result = await Promise.all(
+                    tags.map((tag) => {
+                        return Tag.create({
+                            tag
+                        });
+                    })
+                );
+                //console.log(result);
+                await posting.addTags(result.map(r => r.id));
+            }
             res.redirect('/');
             //res.send({success: 'success'});
         }

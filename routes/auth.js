@@ -343,14 +343,22 @@ router.post('/confirm-edit-posting', isLoggedIn, uploadPostingImages.array('imgs
                         posting.removeTag(tag.id);
                     })
                 );
-                const result = await Promise.all(
-                    tags.map((tag) => {
-                        return Tag.create({
-                            tag
-                        });
-                    })
-                );
-                await posting.addTags(result.map(r => r.id));
+                if(typeof tags === "object"){
+                    const result = await Promise.all(
+                        tags.map((tag) => {
+                            return Tag.create({
+                                tag
+                            });
+                        })
+                    );
+                    await posting.addTags(result.map(r => r.id));
+                }
+                else{
+                    const result = await Tag.create({
+                        tag: tags,
+                    });
+                    await posting.addTags(result);
+                }
             }
             const images = req.files;
             if(images){

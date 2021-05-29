@@ -23,7 +23,7 @@ $(document).ready(() => {
         const image = $('#context__images');
         images.forEach((img) => {
             image.append(`
-                <img src="/letter/posting-images?post_id=${posting_id}&img_id=${img.id}" alt="posting images" height="100" width="100">
+                <img src="/letter/posting-images?post_id=${posting_id}&img_id=${img.id}" alt="posting images" class="posting-imgs">
             `);
         });
         const category = $('#context__category');

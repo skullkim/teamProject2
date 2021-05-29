@@ -36,3 +36,8 @@ p, span {
     padding: 1vh 1vw;
     height: 3vh;
 }
+
+.posting-imgs {
+    width: 15em;
+    height: 20em;
+}

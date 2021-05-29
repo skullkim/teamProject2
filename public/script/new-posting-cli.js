@@ -35,6 +35,7 @@ $(document).ready(() => {
                 //console.log(response);
                 const {tags} = response.data;
                 const tag = $('#post__tag');
+                tag.children().remove();
                 let ids = 0, id
                 tags.forEach((ele) => {
                     id = `category-${ids}`;

@@ -51,44 +51,4 @@ $(document).ready(() => {
             })
     })
 
-    const submit_btn = $('#new-post__submit');
-    // submit_btn.click(() => {
-    //     const title = $('#post__title').val();
-    //     const category = getCategory();
-    //     const context = $('#post__main-context').val();
-    //     const tags = new Array();
-    //     $('input:checkbox[name="tag-box"]').each(function(){
-    //         if(this.checked === true){
-    //             tags.push(this.value);
-    //         }
-    //     });
-    //     if(!makeErrorMessage(title, category, context)){
-    //         return;
-    //     }
-    //     axios({
-    //         method: 'put',
-    //         url: '/auth/new-posting',
-    //         contentType: 'application/json',
-    //         cacheControl: 'no-cache',
-    //         data:{
-    //             title,
-    //             category,
-    //             context,
-    //             tags
-    //         }
-    //     })
-    //         .then((response) => {
-    //             const{err} = response.data;
-    //             if(err){
-    //                 message.text(err);
-    //             }
-    //             else{
-    //                 location.href="/";
-    //             }
-    //         })
-    //         .catch((err) => {
-    //             console.error(err);
-    //         })
-    // });
-
 });

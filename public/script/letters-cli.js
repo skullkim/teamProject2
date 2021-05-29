@@ -21,7 +21,6 @@ $(document).ready(() => {
                     ul.append(`<li><a class="links" href="/letter/result?scope=category&target=${tag}">${tag}</a></li>`);
                 });
                 aside.append(ul);
-                //console.log(key, value);
             })
         })
         .catch((err) => {

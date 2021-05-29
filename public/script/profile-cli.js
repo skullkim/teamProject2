@@ -17,7 +17,6 @@ $(document).ready(() => {
         const $div = $(`
             <div class="comment">
                 <p>댓글: ${comment}</p>
-<!--                <button id="comments__edit"><a href="/auth/edit-comment?id=${id}">수정</a></button>-->
                 <button class="comments__edit">수정</input>
                 <button class="comments__remove">삭제</button>
                 <span class="comment-id" style="visibility: hidden">${id}</span>

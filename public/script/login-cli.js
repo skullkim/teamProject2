@@ -27,7 +27,6 @@ $(document).ready(function (){
                 .then((response) => {
                     const {err} = response.data;
                     if (err) {
-                        //message.innerText = err;
                         message.text(err);
                     } else {
                         location.href = '/';

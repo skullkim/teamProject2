@@ -10,6 +10,12 @@ $(document).ready(function(){
         const reg_age = /^[0-9]*$/;
         return !reg_age.test(age) ? false : true;
     }
+
+    const checkPassword = (password) => {
+        const reg_passwd = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+        return reg_passwd.test(password);
+    }
+
     submit_btn.click(() => {
         const name =  $('#local__name').val();
         const age = $('#local__age').val();
@@ -25,6 +31,9 @@ $(document).ready(function(){
         }
         else if(!checkAge(age)){
             message.text("incorrect age");
+        }
+        else if(!checkPassword(passwd1)){
+            message.text(`Password must contain at least 8 characters, one character, one number, and one special character`);
         }
         else{
             axios({

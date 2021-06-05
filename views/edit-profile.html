@@ -15,9 +15,9 @@
                 <label for="img__choose">Avatar</label>
                 <input type="file" value="Avatar" name="profile_img" id="img__choose">
             </div>
-            <input type="text" placeholder="" name="name" class="profile-inputs" id="edit-profile__name">
-            <input type="email" placeholder="" name="email" class="profile-inputs" id="edit-profile__email">
-            <input type="text" placeholder="" name="age" class="profile-inputs" id="edit-profile__age">
+            <input type="text" placeholder="" name="name" maxlength="20" class="profile-inputs" id="edit-profile__name">
+            <input type="email" placeholder="" name="email" maxlength="30" class="profile-inputs" id="edit-profile__email">
+            <input type="text" placeholder="" name="age" maxlength="3" class="profile-inputs" id="edit-profile__age">
             <button class="profile-inputs" id="edit-profile__submit">change profile</button>
             <span id="edit-profile__message">{{message}}</span>
         </form>

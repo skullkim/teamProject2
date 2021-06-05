@@ -94,11 +94,18 @@ $(document).ready(() => {
        })
            .then((response) => {
                const {name} = response.data;
-               //console.log(name);
                makeComment(name, comment);
            })
            .catch((err) => {
                console.error(err);
            })
+    });
+    const comment_len = $('#comment-input__len');
+    $('#comment-input__comment').on('keyup', function() {
+        comment_len.html(`${$(this).val().length}/800`);
+        if($(this).val().length > 800){
+            $(this).val($(this).val().substring(0, 800));
+            comment_len.html('800/800');
+        }
     });
 })

@@ -50,5 +50,14 @@ $(document).ready(() => {
                 console.error(err);
             })
     })
-
+    const main_context = $('#post__main-context');
+    main_context.on('keyup', function() {
+        $('#post__main-context-len').html(`${$(this).val().length}/50000`);
+        //console.log(this);
+        console.log($(this).val().length);
+        if($(this).val().length > 50000){
+            $(this).val($(this).val().substring(0, 50000));
+            $('#post__main-context-len').html('50000/50000');
+        }
+    })
 });

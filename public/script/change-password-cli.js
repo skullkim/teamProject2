@@ -3,6 +3,10 @@ $(document).ready(() => {
         const reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
         return !reg_email.test(email) ? false : true;
     }
+    const checkPassword = (password) => {
+        const reg_passwd = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+        return reg_passwd.test(password);
+    }
     const submit_btn = $('#change-passwd__submit');
     submit_btn.click(() => {
         const email = $('#change-passwd__email').val();
@@ -15,6 +19,9 @@ $(document).ready(() => {
         }
         else if(passwd1 != passwd2){
             err_message.text('incorrect password');
+        }
+        else if(!checkPassword(passwd1)){
+            err_message.text(`Password must contain at least 8 characters, one character, one number, and one special character`);
         }
         else{
             axios({

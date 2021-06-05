@@ -3,12 +3,12 @@ $(document).ready(function(){
     //올바른 이메일 주소인지를 판단
     const checkEmail = (email) => {
         const reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-        return !reg_email.test(email) ? false : true;
+        return reg_email.test(email);
     }
     //나이에 숫자만 포함되 있는지 판단
     const checkAge = (age) => {
         const reg_age = /^[0-9]*$/;
-        return !reg_age.test(age) ? false : true;
+        return reg_age.test(age);
     }
 
     const checkPassword = (password) => {

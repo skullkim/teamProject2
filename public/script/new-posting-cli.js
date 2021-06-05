@@ -37,7 +37,8 @@ $(document).ready(() => {
                 const tag = $('#post__tag');
                 tag.children().remove();
                 let ids = 0, id
-                tags.forEach((ele) => {
+                tags.filter((ele) => ele !== '도서 추천')
+                    .forEach((ele) => {
                     id = `category-${ids}`;
                     const check_box = $(`
                         <input type="checkbox" id="${id}" value=${ele} name="tags">

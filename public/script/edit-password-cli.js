@@ -1,4 +1,9 @@
 $(document).ready(() => {
+    const checkPassword = (password) => {
+        const reg_passwd = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+        return reg_passwd.test(password);
+    }
+
     const message = $('#message');
     const submit_btn = $('#passwd__submit');
     submit_btn.click(() => {
@@ -7,6 +12,10 @@ $(document).ready(() => {
         const new_passwd2 = $('#passwd__new-passwd2').val();
         if(new_passwd !== new_passwd2) {
             message.text("incorrect verify passsword")
+            return;
+        }
+        else if(!checkPassword(new_passwd)){
+            message.text(`Password must contain at least 8 characters, one character, one number, and one special character`);
             return;
         }
         axios({

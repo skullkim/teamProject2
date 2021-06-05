@@ -30,6 +30,10 @@
 #signup__api {
     height: 39.5vh;
     margin-left: 2vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #api__headline {

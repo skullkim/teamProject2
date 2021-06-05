@@ -399,8 +399,9 @@ router.post('/confirm-edit-posting', isLoggedIn, uploadPostingImages.array('imgs
 router.get('/remove-posting', isLoggedIn, async(req, res, next) => {
     try{
         const {written} = req.query;
+        const written_id = written * 1;
         const posting = await Posting.findOne({
-            where: {id: written},
+            where: {id: written_id},
         });
         const tags = await posting.getTags();
         if(tags){
@@ -411,15 +412,18 @@ router.get('/remove-posting', isLoggedIn, async(req, res, next) => {
             );
         }
         const posting_img = await PostingImage.findOne({
-            where: {post_id: written}
+            where: {post_id: written_id}
         });
         if(posting_img){
             await PostingImage.destroy({
-                where: {post_id: written},
+                where: {post_id: written_id},
             });
         }
+        await Comment.destroy({
+            where: {posting_id: written_id}
+        });
         await Posting.destroy({
-            where: {id: written}
+            where: {id: written_id}
         });
         res.redirect('/auth/profile');
     }

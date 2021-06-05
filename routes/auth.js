@@ -410,6 +410,14 @@ router.get('/remove-posting', isLoggedIn, async(req, res, next) => {
                 })
             );
         }
+        const posting_img = await PostingImage.findOne({
+            where: {post_id: written}
+        });
+        if(posting_img){
+            await PostingImage.destroy({
+                where: {post_id: written},
+            });
+        }
         await Posting.destroy({
             where: {id: written}
         });

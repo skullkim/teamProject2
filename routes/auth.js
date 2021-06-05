@@ -403,11 +403,13 @@ router.get('/remove-posting', isLoggedIn, async(req, res, next) => {
             where: {id: written},
         });
         const tags = await posting.getTags();
-        await Promise.all(
-            tags.map((tag) => {
-                posting.removeTag(tag.id);
-            })
-        );
+        if(tags){
+            await Promise.all(
+                tags.map((tag) => {
+                    return posting.removeTag(tag.id);
+                })
+            );
+        }
         await Posting.destroy({
             where: {id: written}
         });

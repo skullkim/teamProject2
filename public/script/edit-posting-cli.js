@@ -10,6 +10,7 @@ $(document).ready(() => {
         $('#main__post').attr('action', `/auth/confirm-edit-posting?post_id=${written}`);
        $('#post__title').val(`${title}`)//제목
         $('#post__main-context').val(`${main_posting}`);//글 내용
+       $('#post__main-context-len').html(`(${main_posting.length}/50000)`);
        $('#post__category').val(`${main_category}`).prop('selected', true);//메인 카테고리
        const tags = $('#post__tag');
        let ids = 0;
@@ -109,4 +110,13 @@ $(document).ready(() => {
         return true;
     }
 
+    const main_context = $('#post__main-context');
+    main_context.on('keyup', function() {
+        $('#post__main-context-len').html(`${$(this).val().length}/50000`);
+        console.log($(this).val().length);
+        if($(this).val().length > 50000){
+            $(this).val($(this).val().substring(0, 50000));
+            $('#post__main-context-len').html('50000/50000');
+        }
+    })
 });

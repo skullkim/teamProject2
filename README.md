@@ -25,6 +25,9 @@
   Frontend: Nunjucks, Jquery<br>
   Database: Sequelize, mysql
 - - -
+## Demonstration Video
+[!(Demonstration video)(https://i9.ytimg.com/vi/sE_0v_QY6H0/mq1.jpg?sqp=COie8IYG&rs=AOn4CLA1iqMVGCNoRs2mbLvzpEE-NAvD-Q)](https://www.youtube.com/watch?v=sE_0v_QY6H0)
+- - -
 ## License
   This project is licensed under the terms of the MIT license.
 - - -
